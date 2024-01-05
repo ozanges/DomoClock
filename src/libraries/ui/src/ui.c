@@ -7,9 +7,9 @@
 #include "ui_helpers.h"
 
 ///////////////////// VARIABLES ////////////////////
-void secondes_Animation(lv_obj_t * TargetObject, int delay);
-void hours_Animation(lv_obj_t * TargetObject, int delay);
-void minutes_Animation(lv_obj_t * TargetObject, int delay);
+void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay);
+void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
+void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
 
 
 // SCREEN: ui_Screen1
@@ -17,14 +17,14 @@ void ui_Screen1_screen_init(void);
 lv_obj_t * ui_Screen1;
 lv_obj_t * ui_Button1;
 lv_obj_t * ui_Label1;
-lv_obj_t * ui_Secondes;
-lv_obj_t * ui_Minute_label_00;
-lv_obj_t * ui_Hour_group;
-lv_obj_t * ui_Hour_Label_00;
-lv_obj_t * ui_Hour_label_01;
-lv_obj_t * ui_Button_weather;
-lv_obj_t * ui_Image1;
-lv_obj_t * ui_Image2;
+lv_obj_t * ui_ImgSeconde;
+lv_obj_t * ui_LbMinute00;
+lv_obj_t * ui_GpHour;
+lv_obj_t * ui_LbHour0h;
+lv_obj_t * ui_LbHourh0;
+lv_obj_t * ui_BtGoToWeatherScreen;
+lv_obj_t * ui_ImgWeather;
+lv_obj_t * ui_ImgArc;
 void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};
@@ -38,7 +38,7 @@ const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};
 #endif
 
 ///////////////////// ANIMATIONS ////////////////////
-void secondes_Animation(lv_obj_t * TargetObject, int delay)
+void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay)
 {
     ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
     PropertyAnimation_0_user_data->target = TargetObject;
@@ -61,7 +61,7 @@ void secondes_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_start(&PropertyAnimation_0);
 
 }
-void hours_Animation(lv_obj_t * TargetObject, int delay)
+void AniGpHour_Animation(lv_obj_t * TargetObject, int delay)
 {
     ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
     PropertyAnimation_0_user_data->target = TargetObject;
@@ -102,7 +102,7 @@ void hours_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_start(&PropertyAnimation_1);
 
 }
-void minutes_Animation(lv_obj_t * TargetObject, int delay)
+void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay)
 {
     ui_anim_user_data_t * PropertyAnimation_0_user_data = lv_mem_alloc(sizeof(ui_anim_user_data_t));
     PropertyAnimation_0_user_data->target = TargetObject;
@@ -150,13 +150,10 @@ void ui_event____initial_actions0(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        secondes_Animation(ui_Secondes, 0);
+        AniImgSeconde_Animation(ui_ImgSeconde, 0);
     }
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        hours_Animation(ui_Hour_group, 0);
-    }
-    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        minutes_Animation(ui_Minute_label_00, 0);
+        AniLbMinute00_Animation(ui_LbMinute00, 0);
     }
 }
 

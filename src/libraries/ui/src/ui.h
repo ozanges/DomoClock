@@ -26,22 +26,22 @@ extern "C" {
 #include "components/ui_comp.h"
 #include "components/ui_comp_hook.h"
 #include "ui_events.h"
-void secondes_Animation(lv_obj_t * TargetObject, int delay);
-void hours_Animation(lv_obj_t * TargetObject, int delay);
-void minutes_Animation(lv_obj_t * TargetObject, int delay);
+void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay);
+void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
+void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
 extern lv_obj_t * ui_Screen1;
 extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_Secondes;
-extern lv_obj_t * ui_Minute_label_00;
-extern lv_obj_t * ui_Hour_group;
-extern lv_obj_t * ui_Hour_Label_00;
-extern lv_obj_t * ui_Hour_label_01;
-extern lv_obj_t * ui_Button_weather;
-extern lv_obj_t * ui_Image1;
-extern lv_obj_t * ui_Image2;
+extern lv_obj_t * ui_ImgSeconde;
+extern lv_obj_t * ui_LbMinute00;
+extern lv_obj_t * ui_GpHour;
+extern lv_obj_t * ui_LbHour0h;
+extern lv_obj_t * ui_LbHourh0;
+extern lv_obj_t * ui_BtGoToWeatherScreen;
+extern lv_obj_t * ui_ImgWeather;
+extern lv_obj_t * ui_ImgArc;
 void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
