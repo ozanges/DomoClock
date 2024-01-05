@@ -37,13 +37,6 @@ void ui_Screen1_screen_init(void)
     lv_obj_clear_flag(ui_Secondes, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_img_set_pivot(ui_Secondes, 4, 118);
 
-    ui_Container1 = lv_obj_create(ui_Screen1);
-    lv_obj_remove_style_all(ui_Container1);
-    lv_obj_set_width(ui_Container1, 100);
-    lv_obj_set_height(ui_Container1, 50);
-    lv_obj_set_align(ui_Container1, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
     ui_Minute_label_00 = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_Minute_label_00, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Minute_label_00, LV_SIZE_CONTENT);    /// 1
