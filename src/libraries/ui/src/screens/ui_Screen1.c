@@ -37,27 +37,27 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_style_text_opa(ui_Hour_Label_00, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Hour_Label_00, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Hour_Label_01 = lv_label_create(ui_Screen1);
-    lv_obj_set_width(ui_Hour_Label_01, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Hour_Label_01, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Hour_Label_01, 55);
-    lv_obj_set_y(ui_Hour_Label_01, -30);
-    lv_obj_set_align(ui_Hour_Label_01, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_Hour_Label_01, "3");
-    lv_obj_set_style_text_color(ui_Hour_Label_01, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Hour_Label_01, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Hour_Label_01, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Hour_label_01 = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Hour_label_01, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Hour_label_01, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Hour_label_01, 55);
+    lv_obj_set_y(ui_Hour_label_01, -30);
+    lv_obj_set_align(ui_Hour_label_01, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_Hour_label_01, "3");
+    lv_obj_set_style_text_color(ui_Hour_label_01, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Hour_label_01, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Hour_label_01, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Minute_Label_00 = lv_label_create(ui_Screen1);
-    lv_obj_set_width(ui_Minute_Label_00, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Minute_Label_00, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Minute_Label_00, 45);
-    lv_obj_set_y(ui_Minute_Label_00, 6);
-    lv_obj_set_align(ui_Minute_Label_00, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Minute_Label_00, "27");
-    lv_obj_set_style_text_color(ui_Minute_Label_00, lv_color_hex(0xEE1E1E), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Minute_Label_00, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Minute_Label_00, &ui_font_Montserrat_light_72, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Minute_label_00 = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Minute_label_00, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Minute_label_00, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Minute_label_00, 45);
+    lv_obj_set_y(ui_Minute_label_00, 6);
+    lv_obj_set_align(ui_Minute_label_00, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Minute_label_00, "27");
+    lv_obj_set_style_text_color(ui_Minute_label_00, lv_color_hex(0xEE1E1E), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Minute_label_00, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Minute_label_00, &ui_font_Montserrat_light_72, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Secondes = lv_img_create(ui_Screen1);
     lv_img_set_src(ui_Secondes, &ui_img_sec_dot_png);

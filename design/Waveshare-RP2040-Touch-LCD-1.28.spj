@@ -878,7 +878,7 @@
               {
                 "nid": -1315297741,
                 "strtype": "OBJECT/Name",
-                "strval": "Hour Label 01",
+                "strval": "Hour label 01",
                 "InheritedType": 10
               },
               {
@@ -1191,7 +1191,7 @@
               {
                 "nid": -457586167,
                 "strtype": "OBJECT/Name",
-                "strval": "Minute Label 00",
+                "strval": "Minute label 00",
                 "InheritedType": 10
               },
               {
@@ -2330,7 +2330,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 48,
+    "backup_cnt": 51,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",
