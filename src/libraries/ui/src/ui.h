@@ -34,6 +34,7 @@ extern lv_obj_t * ui_Hour_Label_00;
 extern lv_obj_t * ui_Hour_Label_01;
 extern lv_obj_t * ui_Minute_Label_00;
 extern lv_obj_t * ui_Secondes;
+void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
 LV_IMG_DECLARE(ui_img_background_png);    // assets\background.png

@@ -19,6 +19,7 @@ lv_obj_t * ui_Hour_Label_00;
 lv_obj_t * ui_Hour_Label_01;
 lv_obj_t * ui_Minute_Label_00;
 lv_obj_t * ui_Secondes;
+void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -55,6 +56,14 @@ void secondes_Animation(lv_obj_t * TargetObject, int delay)
 }
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event____initial_actions0(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        secondes_Animation(ui_Secondes, 0);
+    }
+}
 
 ///////////////////// SCREENS ////////////////////
 
@@ -66,5 +75,8 @@ void ui_init(void)
     lv_disp_set_theme(dispp, theme);
     ui_Screen1_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
+    lv_obj_add_event_cb(ui____initial_actions0, ui_event____initial_actions0, LV_EVENT_ALL, NULL);
+
+    lv_disp_load_scr(ui____initial_actions0);
     lv_disp_load_scr(ui_Screen1);
 }

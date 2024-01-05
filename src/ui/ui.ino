@@ -121,7 +121,7 @@ void setup()
 
     ui_init();
 
-    secondes_Animation(ui_Secondes, 0);
+    //secondes_Animation(ui_Secondes, 0);
 
     Serial.println( "Setup done" );
 }

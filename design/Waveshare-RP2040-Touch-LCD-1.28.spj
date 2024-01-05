@@ -2027,6 +2027,82 @@
         "strtype": "STARTEVENTS/Name",
         "strval": "___initial_actions0",
         "InheritedType": 10
+      },
+      {
+        "disabled": false,
+        "nid": -779893153,
+        "strtype": "STARTEVENTS/EventHandler",
+        "strval": "SCREEN_LOAD_START",
+        "childs": [
+          {
+            "nid": -1560871800,
+            "strtype": "_custom/name",
+            "strval": "Seconds",
+            "InheritedType": 10
+          },
+          {
+            "nid": 1870219147,
+            "strtype": "_custom/condition_C",
+            "strval": "",
+            "InheritedType": 10
+          },
+          {
+            "nid": 607891861,
+            "strtype": "_custom/condition_P",
+            "strval": "",
+            "InheritedType": 10
+          },
+          {
+            "nid": 871193036,
+            "strtype": "_custom/action",
+            "strval": "PLAY ANIMATION",
+            "childs": [
+              {
+                "nid": -353294158,
+                "strtype": "PLAY ANIMATION/Name",
+                "strval": "PLAY ANIMATION",
+                "InheritedType": 10
+              },
+              {
+                "nid": 2136164940,
+                "strtype": "PLAY ANIMATION/FunctionName",
+                "strval": "secondes_Animation",
+                "InheritedType": 10
+              },
+              {
+                "nid": -45821047,
+                "strtype": "PLAY ANIMATION/Animation",
+                "strval": "secondes",
+                "InheritedType": 8
+              },
+              {
+                "nid": -630491014,
+                "strtype": "PLAY ANIMATION/Target",
+                "strval": "GUID69068838-187522S45935",
+                "InheritedType": 9
+              },
+              {
+                "nid": 407758153,
+                "strtype": "PLAY ANIMATION/Delay",
+                "InheritedType": 6
+              },
+              {
+                "nid": -831609188,
+                "strtype": "PLAY ANIMATION/Call",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1562560312,
+                "strtype": "PLAY ANIMATION/CallC",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 10
+          }
+        ],
+        "InheritedType": 4
       }
     ],
     "saved_objtypeKey": "STARTEVENTS"
