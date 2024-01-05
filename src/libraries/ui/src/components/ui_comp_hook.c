@@ -3,3 +3,8 @@
 // LVGL version: 8.3.6
 // Project name: Waveshare-RP2040-Touch-LCD-1.28
 
+#include "../ui.h"
+
+void ui_comp_Hour_group_create_hook(lv_obj_t * comp)
+{
+}
