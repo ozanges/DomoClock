@@ -7,6 +7,8 @@ SET(SOURCES components/ui_comp_hour_group.c
     ui_events.c
     images/ui_img_background_png.c
     images/ui_img_sec_dot_png.c
+    images/ui_img_weather_png.c
+    images/ui_img_btn_bg_3_png.c
     fonts/ui_font_Montserrat_light_120.c
     fonts/ui_font_Montserrat_light_72.c)
 

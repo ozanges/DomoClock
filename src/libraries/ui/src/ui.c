@@ -22,8 +22,12 @@ lv_obj_t * ui_Minute_label_00;
 lv_obj_t * ui_Hour_group;
 lv_obj_t * ui_Hour_Label_00;
 lv_obj_t * ui_Hour_label_01;
+lv_obj_t * ui_Button_weather;
+lv_obj_t * ui_Image1;
+lv_obj_t * ui_Image2;
 void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
+const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
