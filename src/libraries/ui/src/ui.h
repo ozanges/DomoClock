@@ -29,9 +29,9 @@ extern "C" {
 void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay);
 void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
 void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
+// SCREEN: ui_ScrClock
+void ui_ScrClock_screen_init(void);
+extern lv_obj_t * ui_ScrClock;
 extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui_Label1;
 extern lv_obj_t * ui_ImgSeconde;
@@ -42,6 +42,10 @@ extern lv_obj_t * ui_LbHourh0;
 extern lv_obj_t * ui_BtGoToWeatherScreen;
 extern lv_obj_t * ui_ImgWeather;
 extern lv_obj_t * ui_ImgArc;
+extern lv_obj_t * ui_PnlCalendar;
+extern lv_obj_t * ui_LbDayOfWeek;
+extern lv_obj_t * ui_LbDate;
+extern lv_obj_t * ui_LbYear;
 void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
@@ -50,8 +54,10 @@ LV_IMG_DECLARE(ui_img_sec_dot_png);    // assets\sec_dot.png
 LV_IMG_DECLARE(ui_img_weather_png);    // assets\weather.png
 LV_IMG_DECLARE(ui_img_btn_bg_3_png);    // assets\btn_bg_3.png
 
+LV_FONT_DECLARE(ui_font_Montsererat_bold_12_extended);
 LV_FONT_DECLARE(ui_font_Montserrat_light_120);
 LV_FONT_DECLARE(ui_font_Montserrat_light_72);
+LV_FONT_DECLARE(ui_font_Montserrat_medium_12_extended);
 
 void ui_init(void);
 
