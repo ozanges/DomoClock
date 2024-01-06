@@ -4,7 +4,7 @@
         "args": { "USERNAME": "${localEnv:USER}" } 
     },
     "remoteUser": "${localEnv:USER}",
-    "postCreateCommand": "chmod +x /workspaces/Waveshare-RP2040-Touch-LCD-1.28/build.bash; cp /workspaces/Waveshare-RP2040-Touch-LCD-1.28/scripts/arduino-cli.yaml /home/${localEnv:USER}/.arduino15/arduino-cli.yaml",
+    "postCreateCommand": "chmod +x /workspaces/DomoClock/build.bash; cp /workspaces/DomoClock/scripts/arduino-cli.yaml /home/${localEnv:USER}/.arduino15/arduino-cli.yaml",
     "customizations": {
         "vscode": {
             "extensions": [
