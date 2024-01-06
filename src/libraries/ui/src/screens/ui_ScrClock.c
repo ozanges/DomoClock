@@ -14,8 +14,8 @@ void ui_ScrClock_screen_init(void)
     ui_Button1 = lv_btn_create(ui_ScrClock);
     lv_obj_set_width(ui_Button1, 100);
     lv_obj_set_height(ui_Button1, 50);
-    lv_obj_set_x(ui_Button1, 0);
-    lv_obj_set_y(ui_Button1, 75);
+    lv_obj_set_x(ui_Button1, 2);
+    lv_obj_set_y(ui_Button1, 109);
     lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -171,25 +171,62 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_style_border_color(ui_PnlActualWeather, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_PnlActualWeather, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label3 = lv_label_create(ui_PnlActualWeather);
-    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, -14);
-    lv_obj_set_y(ui_Label3, -3);
-    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label3, "26°");
-    lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Label3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label3, &ui_font_Montserrat_light_20_extended, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_LbActualTemperature = lv_label_create(ui_PnlActualWeather);
+    lv_obj_set_width(ui_LbActualTemperature, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LbActualTemperature, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LbActualTemperature, -14);
+    lv_obj_set_y(ui_LbActualTemperature, -3);
+    lv_obj_set_align(ui_LbActualTemperature, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LbActualTemperature, "26°");
+    lv_obj_set_style_text_color(ui_LbActualTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LbActualTemperature, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LbActualTemperature, &ui_font_Montserrat_light_20_extended,
+                               LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Image1 = lv_img_create(ui_PnlActualWeather);
-    lv_img_set_src(ui_Image1, &ui_img_weather_cloud_fog_png);
-    lv_obj_set_width(ui_Image1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Image1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Image1, 17);
-    lv_obj_set_y(ui_Image1, -3);
-    lv_obj_set_align(ui_Image1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Image1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Image1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_ImgActualWeather = lv_img_create(ui_PnlActualWeather);
+    lv_img_set_src(ui_ImgActualWeather, &ui_img_weather_cloud_fog_png);
+    lv_obj_set_width(ui_ImgActualWeather, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ImgActualWeather, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ImgActualWeather, 17);
+    lv_obj_set_y(ui_ImgActualWeather, -3);
+    lv_obj_set_align(ui_ImgActualWeather, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ImgActualWeather, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_ImgActualWeather, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_PnlTemperature = lv_obj_create(ui_ScrClock);
+    lv_obj_set_width(ui_PnlTemperature, 126);
+    lv_obj_set_height(ui_PnlTemperature, 50);
+    lv_obj_set_x(ui_PnlTemperature, 0);
+    lv_obj_set_y(ui_PnlTemperature, 55);
+    lv_obj_set_align(ui_PnlTemperature, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_PnlTemperature, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_PnlTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_PnlTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_PnlTemperature, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_PnlTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LbActualWeatherText = lv_label_create(ui_PnlTemperature);
+    lv_obj_set_width(ui_LbActualWeatherText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LbActualWeatherText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LbActualWeatherText, -4);
+    lv_obj_set_y(ui_LbActualWeatherText, -11);
+    lv_obj_set_align(ui_LbActualWeatherText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LbActualWeatherText, "Party Cloudly");
+    lv_obj_set_style_text_color(ui_LbActualWeatherText, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LbActualWeatherText, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LbActualWeatherText, &ui_font_Montserrat_medium_12_extended,
+                               LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_LbActualRangeTemperature = lv_label_create(ui_PnlTemperature);
+    lv_obj_set_width(ui_LbActualRangeTemperature, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_LbActualRangeTemperature, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_LbActualRangeTemperature, 3);
+    lv_obj_set_y(ui_LbActualRangeTemperature, 4);
+    lv_obj_set_align(ui_LbActualRangeTemperature, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LbActualRangeTemperature, "Max: 18° Min: 12°");
+    lv_obj_set_style_text_color(ui_LbActualRangeTemperature, lv_color_hex(0x6D6D6D), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_LbActualRangeTemperature, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_LbActualRangeTemperature, &ui_font_Montserrat_medium_12_extended,
+                               LV_PART_MAIN | LV_STATE_DEFAULT);
 
 }

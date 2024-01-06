@@ -48,8 +48,11 @@ extern lv_obj_t * ui_LbDayOfWeek;
 extern lv_obj_t * ui_LbDate;
 extern lv_obj_t * ui_LbYear;
 extern lv_obj_t * ui_PnlActualWeather;
-extern lv_obj_t * ui_Label3;
-extern lv_obj_t * ui_Image1;
+extern lv_obj_t * ui_LbActualTemperature;
+extern lv_obj_t * ui_ImgActualWeather;
+extern lv_obj_t * ui_PnlTemperature;
+extern lv_obj_t * ui_LbActualWeatherText;
+extern lv_obj_t * ui_LbActualRangeTemperature;
 void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
