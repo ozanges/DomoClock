@@ -1,0 +1,16 @@
+{
+  "codename": "Montserrat_light_20_extended",
+  "ttf_path": "\\assets\\Montserrat-Light.ttf",
+  "bin_path": "\\assets\\ui_font_Montserrat_light_20_extended.bin",
+  "c_path": "\\assets\\ui_font_Montserrat_light_20_extended.c",
+  "cfg_path": "\\assets\\ui_font_Montserrat_light_20_extended.fcfg",
+  "size": 20,
+  "bpp": 8,
+  "letters": 3,
+  "ranges": [
+    "0x20-0xff"
+  ],
+  "symbols": "",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}

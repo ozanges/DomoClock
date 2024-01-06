@@ -29,6 +29,9 @@ lv_obj_t * ui_PnlCalendar;
 lv_obj_t * ui_LbDayOfWeek;
 lv_obj_t * ui_LbDate;
 lv_obj_t * ui_LbYear;
+lv_obj_t * ui_PnlActualWeather;
+lv_obj_t * ui_Label3;
+lv_obj_t * ui_Image1;
 void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};
@@ -155,6 +158,9 @@ void ui_event____initial_actions0(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         AniImgSeconde_Animation(ui_ImgSeconde, 0);
+    }
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        AniGpHour_Animation(ui_GpHour, 0);
     }
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         AniLbMinute00_Animation(ui_LbMinute00, 0);

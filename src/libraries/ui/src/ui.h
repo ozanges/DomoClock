@@ -46,6 +46,9 @@ extern lv_obj_t * ui_PnlCalendar;
 extern lv_obj_t * ui_LbDayOfWeek;
 extern lv_obj_t * ui_LbDate;
 extern lv_obj_t * ui_LbYear;
+extern lv_obj_t * ui_PnlActualWeather;
+extern lv_obj_t * ui_Label3;
+extern lv_obj_t * ui_Image1;
 void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
@@ -53,9 +56,11 @@ LV_IMG_DECLARE(ui_img_background_png);    // assets\background.png
 LV_IMG_DECLARE(ui_img_sec_dot_png);    // assets\sec_dot.png
 LV_IMG_DECLARE(ui_img_weather_png);    // assets\weather.png
 LV_IMG_DECLARE(ui_img_btn_bg_3_png);    // assets\btn_bg_3.png
+LV_IMG_DECLARE(ui_img_weather_cloud_fog_png);    // assets\weather_cloud_fog.png
 
 LV_FONT_DECLARE(ui_font_Montsererat_bold_12_extended);
 LV_FONT_DECLARE(ui_font_Montserrat_light_120);
+LV_FONT_DECLARE(ui_font_Montserrat_light_20_extended);
 LV_FONT_DECLARE(ui_font_Montserrat_light_72);
 LV_FONT_DECLARE(ui_font_Montserrat_medium_12_extended);
 
