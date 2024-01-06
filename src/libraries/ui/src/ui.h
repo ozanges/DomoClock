@@ -52,7 +52,9 @@ extern lv_obj_t * ui_PnlTemperature;
 extern lv_obj_t * ui_LbActualWeatherText;
 extern lv_obj_t * ui_LbActualRangeTemperature;
 extern lv_obj_t * ui_PnlElectricity;
-extern lv_obj_t * ui_Arc1;
+extern lv_obj_t * ui_ArcMainElectricity;
+extern lv_obj_t * ui_ArcSecondElectricity;
+extern lv_obj_t * ui_ArcThirdElectricity;
 void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 

@@ -224,28 +224,62 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_style_border_color(ui_PnlElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_PnlElectricity, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Arc1 = lv_arc_create(ui_PnlElectricity);
-    lv_obj_set_width(ui_Arc1, 250);
-    lv_obj_set_height(ui_Arc1, 245);
-    lv_obj_set_x(ui_Arc1, 49);
-    lv_obj_set_y(ui_Arc1, -74);
-    lv_obj_set_align(ui_Arc1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Arc1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_arc_set_value(ui_Arc1, 70);
-    lv_arc_set_bg_angles(ui_Arc1, 97, 160);
-    lv_obj_set_style_border_color(ui_Arc1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui_Arc1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_color(ui_Arc1, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_opa(ui_Arc1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_width(ui_Arc1, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_rounded(ui_Arc1, true, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_ArcMainElectricity = lv_arc_create(ui_PnlElectricity);
+    lv_obj_set_width(ui_ArcMainElectricity, 250);
+    lv_obj_set_height(ui_ArcMainElectricity, 245);
+    lv_obj_set_x(ui_ArcMainElectricity, 49);
+    lv_obj_set_y(ui_ArcMainElectricity, -74);
+    lv_obj_set_align(ui_ArcMainElectricity, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ArcMainElectricity, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_arc_set_value(ui_ArcMainElectricity, 90);
+    lv_arc_set_bg_angles(ui_ArcMainElectricity, 97, 160);
+    lv_obj_set_style_border_color(ui_ArcMainElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_ArcMainElectricity, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_color(ui_ArcMainElectricity, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcMainElectricity, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_ArcMainElectricity, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui_ArcMainElectricity, true, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_arc_color(ui_Arc1, lv_color_hex(0xB0E14A), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_opa(ui_Arc1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_width(ui_Arc1, 6, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_arc_rounded(ui_Arc1, true, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_color(ui_ArcMainElectricity, lv_color_hex(0xB0E14A), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcMainElectricity, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_ArcMainElectricity, 6, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui_ArcMainElectricity, true, LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_bg_color(ui_Arc1, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Arc1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_ArcMainElectricity, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ArcMainElectricity, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_ArcSecondElectricity = lv_arc_create(ui_PnlElectricity);
+    lv_obj_set_width(ui_ArcSecondElectricity, 250);
+    lv_obj_set_height(ui_ArcSecondElectricity, 245);
+    lv_obj_set_x(ui_ArcSecondElectricity, 55);
+    lv_obj_set_y(ui_ArcSecondElectricity, -81);
+    lv_obj_set_align(ui_ArcSecondElectricity, LV_ALIGN_CENTER);
+    lv_arc_set_value(ui_ArcSecondElectricity, 50);
+    lv_arc_set_bg_angles(ui_ArcSecondElectricity, 100, 135);
+    lv_obj_set_style_arc_width(ui_ArcSecondElectricity, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_ArcSecondElectricity, lv_color_hex(0xFF8F40), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcSecondElectricity, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_ArcSecondElectricity, 6, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_ArcSecondElectricity, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ArcSecondElectricity, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_ArcThirdElectricity = lv_arc_create(ui_PnlElectricity);
+    lv_obj_set_width(ui_ArcThirdElectricity, 250);
+    lv_obj_set_height(ui_ArcThirdElectricity, 245);
+    lv_obj_set_x(ui_ArcThirdElectricity, 61);
+    lv_obj_set_y(ui_ArcThirdElectricity, -88);
+    lv_obj_set_align(ui_ArcThirdElectricity, LV_ALIGN_CENTER);
+    lv_arc_set_value(ui_ArcThirdElectricity, 50);
+    lv_arc_set_bg_angles(ui_ArcThirdElectricity, 103, 120);
+    lv_obj_set_style_arc_width(ui_ArcThirdElectricity, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_ArcThirdElectricity, lv_color_hex(0xFF4040), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcThirdElectricity, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_ArcThirdElectricity, 6, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_ArcThirdElectricity, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ArcThirdElectricity, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
 }
