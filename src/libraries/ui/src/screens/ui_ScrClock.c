@@ -165,7 +165,6 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlActualWeather, -33);
     lv_obj_set_y(ui_PnlActualWeather, 21);
     lv_obj_set_align(ui_PnlActualWeather, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_PnlActualWeather, LV_OBJ_FLAG_HIDDEN);     /// Flags
     lv_obj_clear_flag(ui_PnlActualWeather, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlActualWeather, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlActualWeather, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
