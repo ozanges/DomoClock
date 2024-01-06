@@ -16,8 +16,6 @@ void opacity_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
 lv_obj_t * ui_ScrClock;
-lv_obj_t * ui_Button1;
-lv_obj_t * ui_Label1;
 lv_obj_t * ui_ImgSeconde;
 lv_obj_t * ui_LbMinute00;
 lv_obj_t * ui_GpHour;

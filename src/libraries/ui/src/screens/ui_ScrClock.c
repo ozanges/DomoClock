@@ -11,21 +11,6 @@ void ui_ScrClock_screen_init(void)
     lv_obj_clear_flag(ui_ScrClock, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_img_src(ui_ScrClock, &ui_img_background_png, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Button1 = lv_btn_create(ui_ScrClock);
-    lv_obj_set_width(ui_Button1, 100);
-    lv_obj_set_height(ui_Button1, 50);
-    lv_obj_set_x(ui_Button1, 2);
-    lv_obj_set_y(ui_Button1, 109);
-    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label1 = lv_label_create(ui_Button1);
-    lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label1, "Click");
-
     ui_ImgSeconde = lv_img_create(ui_ScrClock);
     lv_img_set_src(ui_ImgSeconde, &ui_img_sec_dot_png);
     lv_obj_set_width(ui_ImgSeconde, LV_SIZE_CONTENT);   /// 1
