@@ -29,6 +29,7 @@ extern "C" {
 void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay);
 void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
 void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
+void opacity_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
 extern lv_obj_t * ui_ScrClock;

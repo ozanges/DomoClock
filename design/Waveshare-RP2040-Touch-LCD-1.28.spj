@@ -5629,6 +5629,131 @@
           }
         ],
         "InheritedType": 4
+      },
+      {
+        "disabled": false,
+        "nid": -1690659325,
+        "strtype": "STARTEVENTS/EventHandler",
+        "strval": "SCREEN_LOAD_START",
+        "childs": [
+          {
+            "nid": 2095378887,
+            "strtype": "_custom/name",
+            "strval": "EvtOpacityWeather",
+            "InheritedType": 10
+          },
+          {
+            "nid": -1335700867,
+            "strtype": "_custom/condition_C",
+            "strval": "",
+            "InheritedType": 10
+          },
+          {
+            "nid": -2011652602,
+            "strtype": "_custom/condition_P",
+            "strval": "",
+            "InheritedType": 10
+          },
+          {
+            "nid": 50736367,
+            "strtype": "_custom/action",
+            "strval": "PLAY ANIMATION",
+            "childs": [
+              {
+                "nid": 2036910727,
+                "strtype": "PLAY ANIMATION/Name",
+                "strval": "PLAY ANIMATION",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1470929007,
+                "strtype": "PLAY ANIMATION/FunctionName",
+                "strval": "opacity_Animation",
+                "InheritedType": 10
+              },
+              {
+                "nid": 2007294348,
+                "strtype": "PLAY ANIMATION/Animation",
+                "strval": "opacity",
+                "InheritedType": 8
+              },
+              {
+                "nid": 2105568593,
+                "strtype": "PLAY ANIMATION/Target",
+                "strval": "GUID44178174-941014S64335",
+                "InheritedType": 9
+              },
+              {
+                "nid": 1199752522,
+                "strtype": "PLAY ANIMATION/Delay",
+                "InheritedType": 6
+              },
+              {
+                "nid": -1943030217,
+                "strtype": "PLAY ANIMATION/Call",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                "InheritedType": 10
+              },
+              {
+                "nid": 312368267,
+                "strtype": "PLAY ANIMATION/CallC",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 10
+          },
+          {
+            "nid": -954768906,
+            "strtype": "_custom/action",
+            "strval": "PLAY ANIMATION",
+            "childs": [
+              {
+                "nid": 1187781687,
+                "strtype": "PLAY ANIMATION/Name",
+                "strval": "PLAY ANIMATION",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1130261851,
+                "strtype": "PLAY ANIMATION/FunctionName",
+                "strval": "opacity_Animation",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1151466267,
+                "strtype": "PLAY ANIMATION/Animation",
+                "strval": "opacity",
+                "InheritedType": 8
+              },
+              {
+                "nid": 1281459388,
+                "strtype": "PLAY ANIMATION/Target",
+                "strval": "GUID95671727-668017S36235",
+                "InheritedType": 9
+              },
+              {
+                "nid": 757919111,
+                "strtype": "PLAY ANIMATION/Delay",
+                "InheritedType": 6
+              },
+              {
+                "nid": 1859005043,
+                "strtype": "PLAY ANIMATION/Call",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
+                "InheritedType": 10
+              },
+              {
+                "nid": -939288797,
+                "strtype": "PLAY ANIMATION/CallC",
+                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 10
+          }
+        ],
+        "InheritedType": 4
       }
     ],
     "saved_objtypeKey": "STARTEVENTS"
@@ -6514,6 +6639,203 @@
         }
       ],
       "saved_objtypeKey": "ELOANIMATION"
+    },
+    {
+      "propertyAnimations": [
+        {
+          "Path": 0,
+          "KeyFrames": [
+            {
+              "Value": 0,
+              "Time": 0.0,
+              "InheritedType": 1
+            },
+            {
+              "Value": 255,
+              "Time": 500.0,
+              "InheritedType": 1
+            }
+          ],
+          "TimeReference": 0,
+          "ValueReference": 1,
+          "EarlyApply": false,
+          "ImageSet": "",
+          "PlaybackTime": 0,
+          "PlaybackDelay": 0,
+          "LoopCount": 0,
+          "LoopDelay": 0,
+          "LoopInfinite": false,
+          "guid": "GUID94041731-389229S61736",
+          "deepid": 562487532,
+          "locked": false,
+          "properties": [
+            {
+              "nid": -630947733,
+              "strtype": "PROPERTYANIMATION/Name",
+              "strval": "Opacity",
+              "InheritedType": 10
+            },
+            {
+              "nid": 337894110,
+              "strtype": "PROPERTYANIMATION/VariableName",
+              "strval": "PropertyAnimation_0",
+              "InheritedType": 10
+            },
+            {
+              "nid": 1545276977,
+              "strtype": "PROPERTYANIMATION/PropertyFunction",
+              "strval": "anim_callback_set_opacity",
+              "InheritedType": 10
+            },
+            {
+              "nid": -234032465,
+              "strtype": "PROPERTYANIMATION/StartValue",
+              "InheritedType": 6
+            },
+            {
+              "nid": -954722164,
+              "strtype": "PROPERTYANIMATION/EndValue",
+              "integer": 255,
+              "InheritedType": 6
+            },
+            {
+              "nid": 900114594,
+              "strtype": "PROPERTYANIMATION/AbsoluteReference",
+              "strval": "False",
+              "InheritedType": 2
+            },
+            {
+              "nid": 2009842197,
+              "strtype": "PROPERTYANIMATION/Delay",
+              "InheritedType": 6
+            },
+            {
+              "nid": -764812280,
+              "strtype": "PROPERTYANIMATION/Duration",
+              "integer": 500,
+              "InheritedType": 6
+            },
+            {
+              "nid": 641592779,
+              "strtype": "PROPERTYANIMATION/Path",
+              "strval": "linear",
+              "InheritedType": 3
+            },
+            {
+              "nid": 235373010,
+              "strtype": "PROPERTYANIMATION/FullAnimationDuration",
+              "integer": 500,
+              "InheritedType": 6
+            },
+            {
+              "nid": 1671076539,
+              "strtype": "PROPERTYANIMATION/LoopCount",
+              "InheritedType": 6
+            },
+            {
+              "nid": 2039210982,
+              "strtype": "PROPERTYANIMATION/Forward",
+              "strval": "True",
+              "InheritedType": 2
+            },
+            {
+              "nid": -2080199883,
+              "strtype": "PROPERTYANIMATION/Backward",
+              "strval": "False",
+              "InheritedType": 2
+            },
+            {
+              "nid": -457680338,
+              "strtype": "PROPERTYANIMATION/EarlyApply",
+              "strval": "False",
+              "InheritedType": 2
+            },
+            {
+              "nid": 1219617282,
+              "strtype": "PROPERTYANIMATION/PropertyGetter",
+              "strval": "anim_callback_get_opacity",
+              "InheritedType": 10
+            },
+            {
+              "nid": -380721575,
+              "strtype": "PROPERTYANIMATION/LoopDelay",
+              "InheritedType": 6
+            },
+            {
+              "nid": -1325010258,
+              "strtype": "PROPERTYANIMATION/PlaybackDelay",
+              "InheritedType": 6
+            },
+            {
+              "nid": 1176844321,
+              "strtype": "PROPERTYANIMATION/PlaybackTime",
+              "InheritedType": 6
+            },
+            {
+              "nid": -1115362641,
+              "strtype": "PROPERTYANIMATION/LoopInfinite",
+              "strval": "False",
+              "InheritedType": 2
+            },
+            {
+              "nid": 1962367063,
+              "strtype": "PROPERTYANIMATION/ImageSet",
+              "strval": "",
+              "InheritedType": 14
+            }
+          ],
+          "saved_objtypeKey": "PROPERTYANIMATION",
+          "InheritedType": 1
+        }
+      ],
+      "guid": "GUID3629786-389220S39736",
+      "deepid": -1765489027,
+      "locked": false,
+      "properties": [
+        {
+          "nid": -523578932,
+          "strtype": "ELOANIMATION/Name",
+          "strval": "opacity",
+          "InheritedType": 10
+        },
+        {
+          "nid": -211759081,
+          "strtype": "ELOANIMATION/FunctionName",
+          "strval": "opacity_Animation",
+          "InheritedType": 10
+        },
+        {
+          "nid": -1127467762,
+          "strtype": "ELOANIMATION/AnimationTargetObjectType",
+          "strval": "BASIC",
+          "InheritedType": 10
+        },
+        {
+          "nid": -179748399,
+          "strtype": "ELOANIMATION/PlayType",
+          "strval": "Forward",
+          "InheritedType": 3
+        },
+        {
+          "nid": 1401403340,
+          "strtype": "ELOANIMATION/Loop",
+          "strval": "False",
+          "InheritedType": 2
+        },
+        {
+          "nid": 76921409,
+          "strtype": "ELOANIMATION/TestTarget",
+          "strval": "GUID95671727-668017S36235",
+          "InheritedType": 10
+        },
+        {
+          "nid": 2111753778,
+          "strtype": "ELOANIMATION/TargetTypeFilter",
+          "strval": "",
+          "InheritedType": 10
+        }
+      ],
+      "saved_objtypeKey": "ELOANIMATION"
     }
   ],
   "info": {
@@ -6540,7 +6862,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 163,
+    "backup_cnt": 165,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",
