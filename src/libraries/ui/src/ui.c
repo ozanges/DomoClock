@@ -12,9 +12,9 @@ void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
 void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
 
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-lv_obj_t * ui_Screen1;
+// SCREEN: ui_ScrClock
+void ui_ScrClock_screen_init(void);
+lv_obj_t * ui_ScrClock;
 lv_obj_t * ui_Button1;
 lv_obj_t * ui_Label1;
 lv_obj_t * ui_ImgSeconde;
@@ -25,6 +25,13 @@ lv_obj_t * ui_LbHourh0;
 lv_obj_t * ui_BtGoToWeatherScreen;
 lv_obj_t * ui_ImgWeather;
 lv_obj_t * ui_ImgArc;
+lv_obj_t * ui_PnlCalendar;
+lv_obj_t * ui_LbDayOfWeek;
+lv_obj_t * ui_LbDate;
+lv_obj_t * ui_LbYear;
+lv_obj_t * ui_PnlActualWeather;
+lv_obj_t * ui_Label3;
+lv_obj_t * ui_Image1;
 void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};
@@ -153,6 +160,9 @@ void ui_event____initial_actions0(lv_event_t * e)
         AniImgSeconde_Animation(ui_ImgSeconde, 0);
     }
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        AniGpHour_Animation(ui_GpHour, 0);
+    }
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         AniLbMinute00_Animation(ui_LbMinute00, 0);
     }
 }
@@ -167,10 +177,10 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
+    ui_ScrClock_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_obj_add_event_cb(ui____initial_actions0, ui_event____initial_actions0, LV_EVENT_ALL, NULL);
 
     lv_disp_load_scr(ui____initial_actions0);
-    lv_disp_load_scr(ui_Screen1);
+    lv_disp_load_scr(ui_ScrClock);
 }
