@@ -34,6 +34,8 @@ lv_obj_t * ui_ImgActualWeather;
 lv_obj_t * ui_PnlTemperature;
 lv_obj_t * ui_LbActualWeatherText;
 lv_obj_t * ui_LbActualRangeTemperature;
+lv_obj_t * ui_PnlElectricity;
+lv_obj_t * ui_Arc1;
 void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_btn_bg_[1] = {&ui_img_btn_bg_3_png};

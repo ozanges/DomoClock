@@ -214,4 +214,38 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_style_text_font(ui_LbActualRangeTemperature, &ui_font_Montserrat_medium_12_extended,
                                LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_PnlElectricity = lv_obj_create(ui_ScrClock);
+    lv_obj_set_width(ui_PnlElectricity, 170);
+    lv_obj_set_height(ui_PnlElectricity, 115);
+    lv_obj_set_align(ui_PnlElectricity, LV_ALIGN_BOTTOM_LEFT);
+    lv_obj_clear_flag(ui_PnlElectricity, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_PnlElectricity, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_PnlElectricity, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_PnlElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_PnlElectricity, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Arc1 = lv_arc_create(ui_PnlElectricity);
+    lv_obj_set_width(ui_Arc1, 250);
+    lv_obj_set_height(ui_Arc1, 245);
+    lv_obj_set_x(ui_Arc1, 49);
+    lv_obj_set_y(ui_Arc1, -74);
+    lv_obj_set_align(ui_Arc1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Arc1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_arc_set_value(ui_Arc1, 70);
+    lv_arc_set_bg_angles(ui_Arc1, 97, 160);
+    lv_obj_set_style_border_color(ui_Arc1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_Arc1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_color(ui_Arc1, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_Arc1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_Arc1, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui_Arc1, true, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_arc_color(ui_Arc1, lv_color_hex(0xB0E14A), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_Arc1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_Arc1, 6, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui_Arc1, true, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_Arc1, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Arc1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
 }
