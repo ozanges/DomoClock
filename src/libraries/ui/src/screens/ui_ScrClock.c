@@ -25,7 +25,7 @@ void ui_ScrClock_screen_init(void)
     ui_LbMinute00 = lv_label_create(ui_ScrClock);
     lv_obj_set_width(ui_LbMinute00, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbMinute00, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbMinute00, 45);
+    lv_obj_set_x(ui_LbMinute00, 58);
     lv_obj_set_y(ui_LbMinute00, 6);
     lv_obj_set_align(ui_LbMinute00, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LbMinute00, "27");
@@ -45,10 +45,10 @@ void ui_ScrClock_screen_init(void)
     ui_LbHour0h = lv_label_create(ui_GpHour);
     lv_obj_set_width(ui_LbHour0h, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbHour0h, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbHour0h, -38);
-    lv_obj_set_y(ui_LbHour0h, 22);
-    lv_obj_set_align(ui_LbHour0h, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LbHour0h, "0");
+    lv_obj_set_x(ui_LbHour0h, -35);
+    lv_obj_set_y(ui_LbHour0h, 21);
+    lv_obj_set_align(ui_LbHour0h, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LbHour0h, "2");
     lv_obj_set_style_text_color(ui_LbHour0h, lv_color_hex(0x393939), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbHour0h, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_LbHour0h, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -56,10 +56,10 @@ void ui_ScrClock_screen_init(void)
     ui_LbHourh0 = lv_label_create(ui_GpHour);
     lv_obj_set_width(ui_LbHourh0, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbHourh0, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbHourh0, 41);
+    lv_obj_set_x(ui_LbHourh0, 47);
     lv_obj_set_y(ui_LbHourh0, 21);
     lv_obj_set_align(ui_LbHourh0, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LbHourh0, "3");
+    lv_label_set_text(ui_LbHourh0, "2");
     lv_obj_set_style_text_color(ui_LbHourh0, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbHourh0, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_LbHourh0, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -102,7 +102,7 @@ void ui_ScrClock_screen_init(void)
     ui_PnlCalendar = lv_obj_create(ui_ScrClock);
     lv_obj_set_width(ui_PnlCalendar, 100);
     lv_obj_set_height(ui_PnlCalendar, 50);
-    lv_obj_set_x(ui_PnlCalendar, 40);
+    lv_obj_set_x(ui_PnlCalendar, 53);
     lv_obj_set_y(ui_PnlCalendar, -64);
     lv_obj_set_align(ui_PnlCalendar, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags

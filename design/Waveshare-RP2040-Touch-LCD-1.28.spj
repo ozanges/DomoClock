@@ -341,7 +341,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  45,
+                  58,
                   6
                 ],
                 "InheritedType": 7
@@ -658,8 +658,8 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -38,
-                      22
+                      -35,
+                      21
                     ],
                     "InheritedType": 7
                   },
@@ -676,11 +676,12 @@
                   {
                     "nid": 1349071271,
                     "strtype": "OBJECT/Align",
-                    "strval": "LEFT_MID",
+                    "strval": "CENTER",
                     "InheritedType": 3
                   },
                   {
                     "nid": 395554643,
+                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -818,6 +819,7 @@
                   },
                   {
                     "nid": -696795272,
+                    "flags": 1048576,
                     "strtype": "OBJECT/States",
                     "InheritedType": 1
                   },
@@ -883,7 +885,7 @@
                   {
                     "nid": 779492622,
                     "strtype": "LABEL/Text",
-                    "strval": "0",
+                    "strval": "2",
                     "InheritedType": 10
                   },
                   {
@@ -969,7 +971,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      41,
+                      47,
                       21
                     ],
                     "InheritedType": 7
@@ -1196,7 +1198,7 @@
                   {
                     "nid": 1042973129,
                     "strtype": "LABEL/Text",
-                    "strval": "3",
+                    "strval": "2",
                     "InheritedType": 10
                   },
                   {
@@ -1541,8 +1543,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID28683668-595914S33135",
@@ -3440,7 +3441,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  40,
+                  53,
                   -64
                 ],
                 "InheritedType": 7
@@ -8724,7 +8725,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 201,
+    "backup_cnt": 205,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",
