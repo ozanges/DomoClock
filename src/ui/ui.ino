@@ -2,6 +2,7 @@
 #include <TFT_eSPI.h>
 #include <ui.h>
 #include "CST816S.h"
+#include <SoftwareSerial.h>
 
 /*Don't forget to set Sketchbook location in File/Preferencesto the path of your UI project (the parent foder of this INO file)*/
 
@@ -17,6 +18,11 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 void Touch_INT_callback();
 uint8_t flag = 0;
 
+const byte txPin = 27;
+const byte rxPin = 28;
+
+SoftwareSerial mySerial (rxPin, txPin);
+int myIndex = 0;
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -96,6 +102,10 @@ void setup()
     lv_log_register_print_cb( my_print ); /* register print function for debugging */
 #endif
 
+    pinMode(rxPin, INPUT);
+    pinMode(txPin, OUTPUT);
+    mySerial.begin(115200);
+
     tft.begin();          /* TFT init */
     tft.setRotation( 0 ); /* Landscape orientation, flipped */
 
@@ -130,6 +140,19 @@ void loop()
 {
     lv_timer_handler(); /* let the GUI do its work */
     delay(5);
+
+    while (mySerial.available() > 0) {
+      char recieved  = mySerial.read();
+      if (recieved == '/i') {
+        Serial.println("a");
+      } else {
+        Serial.println(recieved);
+      }
+    }
+    
+    lv_label_set_text(ui_LbHour0h, "1");
+    lv_label_set_text(ui_LbHourh0, "7");
+    lv_label_set_text(ui_LbMinute00, "14");
 }
 
 void Touch_INT_callback()
