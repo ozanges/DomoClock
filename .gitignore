@@ -5,3 +5,4 @@
 **/build/**/*.map
 **/build/**/*.uf2
 **/*.bak
+**/secrets.h
