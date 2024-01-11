@@ -6264,6 +6264,17 @@
                         "strval": "DEFAULT",
                         "childs": [
                           {
+                            "nid": 375040055,
+                            "strtype": "_style/Arc_Color",
+                            "intarray": [
+                              48,
+                              48,
+                              48,
+                              255
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
                             "nid": -1169738526,
                             "strtype": "_style/Arc_Width",
                             "integer": 6,
@@ -6613,7 +6624,7 @@
                   {
                     "nid": -872551934,
                     "strtype": "ARC/Value",
-                    "integer": 50,
+                    "integer": 80,
                     "InheritedType": 6
                   },
                   {
@@ -6644,6 +6655,17 @@
                         "strtype": "_style/StyleState",
                         "strval": "DEFAULT",
                         "childs": [
+                          {
+                            "nid": -1180996733,
+                            "strtype": "_style/Arc_Color",
+                            "intarray": [
+                              48,
+                              48,
+                              48,
+                              255
+                            ],
+                            "InheritedType": 7
+                          },
                           {
                             "nid": 705655721,
                             "strtype": "_style/Arc_Width",
@@ -7417,7 +7439,7 @@
       {
         "disabled": false,
         "nid": -1690659325,
-        "strtype": "STARTEVENTS/EventHandler",
+        "strtype": "_event/EventHandler",
         "strval": "SCREEN_LOAD_START",
         "childs": [
           {
@@ -7440,7 +7462,7 @@
           },
           {
             "nid": 50736367,
-            "strtype": "_custom/action",
+            "strtype": "_event/action",
             "strval": "PLAY ANIMATION",
             "childs": [
               {
@@ -7489,7 +7511,7 @@
           },
           {
             "nid": -954768906,
-            "strtype": "_custom/action",
+            "strtype": "_event/action",
             "strval": "PLAY ANIMATION",
             "childs": [
               {
