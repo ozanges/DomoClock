@@ -37,6 +37,9 @@ float actualTemperature             = 0.0;
 float minTemperature                = 0.0;
 float maxTemperature                = 0.0;
 String actualStatus                 = "";
+int houseTodayPricePercentage       = 0;
+int laundryTodayPricePercentage     = 0;
+int garageTodayPricePercentage      = 0;
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -156,6 +159,25 @@ void setup()
     Serial.println( "Setup done" );
 }
 
+void calculerCouleur(uint8_t valeur, uint8_t* rouge, uint8_t* vert, uint8_t* bleu) {
+    if (valeur <= 33) {
+        // Vert à Jaune
+        *rouge = map(valeur, 0, 33, 0, 255);
+        *vert = 255;
+        *bleu = 0;
+    } else if (valeur <= 66) {
+        // Jaune à Rouge
+        *rouge = 255;
+        *vert = map(valeur, 34, 66, 255, 0);
+        *bleu = 0;
+    } else {
+        // Rouge
+        *rouge = 255;
+        *vert = 0;
+        *bleu = 0;
+    }
+}
+
 void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
@@ -215,6 +237,23 @@ void loop()
     lv_label_set_text(ui_LbActualWeatherText, actualStatus.c_str());
     lv_label_set_text(ui_LbActualTemperature, String(actualTemperature, 0).c_str());
     lv_label_set_text(ui_LbActualRangeTemperature, rangeTemperature.c_str());
+
+    lv_arc_set_value(ui_ArcMainElectricity, houseTodayPricePercentage);
+    lv_arc_set_value(ui_ArcSecondElectricity, laundryTodayPricePercentage);
+    lv_arc_set_value(ui_ArcThirdElectricity, garageTodayPricePercentage);
+
+    uint8_t rouge, vert, bleu;
+    calculerCouleur(houseTodayPricePercentage, &rouge, &vert, &bleu);
+    lv_color_t color = lv_color_make(rouge, vert, bleu);
+    lv_obj_set_style_arc_color(ui_ArcMainElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    calculerCouleur(laundryTodayPricePercentage, &rouge, &vert, &bleu);
+    color = lv_color_make(rouge, vert, bleu);
+    lv_obj_set_style_arc_color(ui_ArcSecondElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    
+    calculerCouleur(garageTodayPricePercentage, &rouge, &vert, &bleu);
+    color = lv_color_make(rouge, vert, bleu);
+    lv_obj_set_style_arc_color(ui_ArcThirdElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   }
 
   if (!_isFirstTimeSet) {
@@ -242,6 +281,9 @@ void loop()
         maxTemperature = doc["matp"];
         String actualStatusJson = doc["as"];
         actualStatus = actualStatusJson;
+        houseTodayPricePercentage = doc["hp"];
+        laundryTodayPricePercentage = doc["lp"];
+        garageTodayPricePercentage = doc["gp"];
 
         _isFirstTimeSet = true;
       }

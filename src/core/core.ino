@@ -121,13 +121,22 @@ void loop() {
     String minTemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1302");
     String maxtemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1303");
     String actualStatus = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3084");
+    String houseTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3090");
+    String laundryTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3088");
+    String garageTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3089");
 
     String payload    = "{";
     payload += "\"ep\":" + String(epochTime) + ",";
     payload += "\"actp\":" + actualTemperature + ",";
     payload += "\"mitp\":" + minTemperature + ",";
     payload += "\"matp\":" + maxtemperature + ",";
-    payload += "\"as\":\"" + actualStatus + "\"";
+    payload += "\"as\":\"" + actualStatus + "\",";
+    payload += "\"hp\":" + houseTodayPricePercentage + ",";
+    payload += "\"lp\":" + laundryTodayPricePercentage + ",";
+    payload += "\"gp\":" + garageTodayPricePercentage;
+    // payload += "\"hp\":75,";
+    // payload += "\"lp\":50,";
+    // payload += "\"gp\":20";
     payload += "}";
 
     DPRINTLN(payload);
