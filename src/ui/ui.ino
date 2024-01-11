@@ -4,6 +4,12 @@
 #include "CST816S.h"
 #include <SoftwareSerial.h>
 
+#include <time.h>
+#include <sys/time.h>
+
+#include <ArduinoJson.h>
+
+
 /*Don't forget to set Sketchbook location in File/Preferencesto the path of your UI project (the parent foder of this INO file)*/
 
 /*Change to your screen resolution*/
@@ -23,6 +29,14 @@ const byte rxPin = 28;
 
 SoftwareSerial mySerial (rxPin, txPin);
 int myIndex = 0;
+
+long            _delayTX            = 1000;
+unsigned long   _previousTXMillis   = 0;
+bool _isFirstTimeSet                = false;
+float actualTemperature             = 0.0;
+float minTemperature                = 0.0;
+float maxTemperature                = 0.0;
+String actualStatus                 = "";
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -133,26 +147,106 @@ void setup()
 
     //secondes_Animation(ui_Secondes, 0);
 
+    struct timeval tv;
+
+    tv.tv_sec = 1704752282; // Jan 21, 2021  3:14:15AM ...RPi Pico Release;
+    tv.tv_usec = 0;
+    settimeofday(&tv, nullptr);
+
     Serial.println( "Setup done" );
 }
 
 void loop()
 {
-    lv_timer_handler(); /* let the GUI do its work */
-    delay(5);
+  lv_timer_handler(); /* let the GUI do its work */
+  delay(5);
 
+  // while (mySerial.available() > 0) {
+  //   char recieved  = mySerial.read();
+  //   if (recieved == '/i') {
+  //     Serial.println("a");
+  //   } else {
+  //     Serial.println(recieved);
+  //   }
+  // }
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - _previousTXMillis >= _delayTX) {
+    _previousTXMillis = currentMillis;
+    
+    time_t now;
+    char buff[80];
+
+    time(&now);
+    strftime(buff, sizeof(buff), "%c", localtime(&now));
+    Serial.println(buff);
+
+    char dayOfWeek[4];
+    char month[4];
+    int day;
+    int hour, minute, second;
+    int year;
+    char formattedMinute[3];
+
+    sscanf(buff, "%s %s %d %d:%d:%d %d", dayOfWeek, month, &day, &hour, &minute, &second, &year);
+    sprintf(formattedMinute, "%02d", minute);
+
+    // Affichage des résultats
+    Serial.print("Jour de la semaine : "); Serial.println(dayOfWeek);
+    Serial.print("Mois : "); Serial.println(month);
+    Serial.print("Jour du mois : "); Serial.println(day);
+    Serial.print("Heure : "); Serial.print(hour); Serial.print(":"); Serial.print(minute); Serial.print(":"); Serial.println(second);
+    Serial.print("Année : "); Serial.println(year);
+    Serial.print("formattedMinute : "); Serial.println(formattedMinute);
+
+    int firstHour = hour / 10;
+    int secondHour = hour % 10;
+    int sec_angle = 3600 * second / 60;
+    
+    lv_label_set_text(ui_LbHour0h, String(firstHour).c_str());
+    lv_label_set_text(ui_LbHourh0, String(secondHour).c_str());
+    lv_label_set_text(ui_LbMinute00, String(formattedMinute).c_str());
+    lv_label_set_text(ui_LbDayOfWeek, dayOfWeek);
+    lv_label_set_text(ui_LbDate, String(String(day) + " " + month).c_str());
+    lv_label_set_text(ui_LbYear, String(year).c_str());
+    lv_img_set_angle(ui_ImgSeconde, sec_angle);
+
+    String rangeTemperature = "Min: " + String(minTemperature, 0) + "° Max: " + String(maxTemperature, 0) + "°";
+    lv_label_set_text(ui_LbActualWeatherText, actualStatus.c_str());
+    lv_label_set_text(ui_LbActualTemperature, String(actualTemperature, 0).c_str());
+    lv_label_set_text(ui_LbActualRangeTemperature, rangeTemperature.c_str());
+  }
+
+  if (!_isFirstTimeSet) {
+    String data = "";
     while (mySerial.available() > 0) {
-      char recieved  = mySerial.read();
-      if (recieved == '/i') {
-        Serial.println("a");
+      data = mySerial.readStringUntil('\n');
+    }
+
+    if (data.length() > 0) {
+      Serial.println(data);
+      StaticJsonDocument<128> doc;
+      DeserializationError    error = deserializeJson(doc, data);
+      if (error) {
+        Serial.print(F("RX() deserializeJson() failed: "));
+        Serial.println(error.f_str());
+        //return false;
       } else {
-        Serial.println(recieved);
+        struct timeval tv;
+        tv.tv_sec = doc["ep"]; // Jan 21, 2021  3:14:15AM ...RPi Pico Release;
+        tv.tv_usec = 0;
+        settimeofday(&tv, nullptr);
+
+        actualTemperature = doc["actp"];
+        minTemperature = doc["mitp"];
+        maxTemperature = doc["matp"];
+        String actualStatusJson = doc["as"];
+        actualStatus = actualStatusJson;
+
+        _isFirstTimeSet = true;
       }
     }
-    
-    lv_label_set_text(ui_LbHour0h, "1");
-    lv_label_set_text(ui_LbHourh0, "7");
-    lv_label_set_text(ui_LbMinute00, "14");
+  }
 }
 
 void Touch_INT_callback()
