@@ -6,6 +6,9 @@
 #include "debug.h"
 #include "utils.h"
 
+#include <ESP8266HTTPClient.h>
+#include <WiFiClient.h>
+
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
@@ -32,7 +35,7 @@ void wifiSetup()
 
   while (WiFi.status() != WL_CONNECTED)
   {
-    DPRINT(".");
+    DPRINT(F("."));
     delay(500);
     blink(1);
 
@@ -79,6 +82,28 @@ void setup() {
   //serialSetup();
 }
 
+String getWebData(const String& url) {
+  String data = "";
+  WiFiClient client;
+  HTTPClient http;
+  if (http.begin(client, url)) { 
+    int httpCode = http.GET();
+    if (httpCode > 0) {
+      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+        data = http.getString();
+        // DPRINTLN(data);
+      }
+    } 
+#ifdef DEBUG    
+    else { Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str()); }
+#endif
+
+    http.end();
+  }
+
+  return data;
+}
+
 void loop() {
   unsigned long currentMillis = millis();
 	if (currentMillis - _previousTXMillis >= _delayTX) {
@@ -91,15 +116,18 @@ void loop() {
     int currentMonth = ptm->tm_mon+1;
     String currentMonthName = months[currentMonth-1];
     int currentYear = ptm->tm_year+1900;
+    
+    String actualTemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1313");
+    String minTemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1302");
+    String maxtemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1303");
+    String actualStatus = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3084");
 
     String payload    = "{";
-    payload += "\"hh\":" + String(timeClient.getHours()) + ",";
-    payload += "\"mm\":" + String(timeClient.getMinutes()) + ",";
-    payload += "\"ss\":" + String(timeClient.getSeconds()) + ",";
-    payload += "\"wk\":" + weekDays[timeClient.getDay()] + ",";
-    payload += "\"md\":" + String(monthDay) + ",";
-    payload += "\"mn\":" + currentMonthName + ",";
-    payload += "\"yy\":" + String(currentYear);
+    payload += "\"ep\":" + String(epochTime) + ",";
+    payload += "\"actp\":" + actualTemperature + ",";
+    payload += "\"mitp\":" + minTemperature + ",";
+    payload += "\"matp\":" + maxtemperature + ",";
+    payload += "\"as\":\"" + actualStatus + "\"";
     payload += "}";
 
     DPRINTLN(payload);
