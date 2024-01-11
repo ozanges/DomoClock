@@ -102,7 +102,7 @@ void ui_ScrClock_screen_init(void)
     ui_PnlCalendar = lv_obj_create(ui_ScrClock);
     lv_obj_set_width(ui_PnlCalendar, 100);
     lv_obj_set_height(ui_PnlCalendar, 50);
-    lv_obj_set_x(ui_PnlCalendar, 53);
+    lv_obj_set_x(ui_PnlCalendar, 67);
     lv_obj_set_y(ui_PnlCalendar, -64);
     lv_obj_set_align(ui_PnlCalendar, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -114,9 +114,9 @@ void ui_ScrClock_screen_init(void)
     ui_LbDayOfWeek = lv_label_create(ui_PnlCalendar);
     lv_obj_set_width(ui_LbDayOfWeek, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbDayOfWeek, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbDayOfWeek, -20);
+    lv_obj_set_x(ui_LbDayOfWeek, -15);
     lv_obj_set_y(ui_LbDayOfWeek, -15);
-    lv_obj_set_align(ui_LbDayOfWeek, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbDayOfWeek, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbDayOfWeek, "MON");
     lv_obj_set_style_text_color(ui_LbDayOfWeek, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbDayOfWeek, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -127,7 +127,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_height(ui_LbDate, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_LbDate, -15);
     lv_obj_set_y(ui_LbDate, 0);
-    lv_obj_set_align(ui_LbDate, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbDate, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbDate, "18 FEB");
     lv_obj_set_style_text_color(ui_LbDate, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbDate, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -136,9 +136,9 @@ void ui_ScrClock_screen_init(void)
     ui_LbYear = lv_label_create(ui_PnlCalendar);
     lv_obj_set_width(ui_LbYear, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbYear, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbYear, -21);
+    lv_obj_set_x(ui_LbYear, -15);
     lv_obj_set_y(ui_LbYear, 14);
-    lv_obj_set_align(ui_LbYear, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbYear, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbYear, "2022");
     lv_obj_set_style_text_color(ui_LbYear, lv_color_hex(0x6B6B6B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbYear, 255, LV_PART_MAIN | LV_STATE_DEFAULT);

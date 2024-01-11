@@ -2506,7 +2506,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -20,
+                      -15,
                       -15
                     ],
                     "InheritedType": 7
@@ -2524,7 +2524,7 @@
                   {
                     "nid": -1791336237,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
@@ -2836,7 +2836,7 @@
                   {
                     "nid": 32450124,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
@@ -3130,7 +3130,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -21,
+                      -15,
                       14
                     ],
                     "InheritedType": 7
@@ -3148,7 +3148,7 @@
                   {
                     "nid": 1181843539,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
@@ -3441,7 +3441,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  53,
+                  67,
                   -64
                 ],
                 "InheritedType": 7
@@ -3702,8 +3702,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID95671727-668017S36235",
@@ -4614,8 +4613,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID27240829-389271S97536",
@@ -5544,8 +5542,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID88528955-391394S46536",
@@ -7267,82 +7264,6 @@
       },
       {
         "disabled": false,
-        "nid": -779893153,
-        "strtype": "_event/EventHandler",
-        "strval": "SCREEN_LOAD_START",
-        "childs": [
-          {
-            "nid": -1560871800,
-            "strtype": "_custom/name",
-            "strval": "EvtImgSeconde",
-            "InheritedType": 10
-          },
-          {
-            "nid": 1870219147,
-            "strtype": "_custom/condition_C",
-            "strval": "",
-            "InheritedType": 10
-          },
-          {
-            "nid": 607891861,
-            "strtype": "_custom/condition_P",
-            "strval": "",
-            "InheritedType": 10
-          },
-          {
-            "nid": 871193036,
-            "strtype": "_event/action",
-            "strval": "PLAY ANIMATION",
-            "childs": [
-              {
-                "nid": -353294158,
-                "strtype": "PLAY ANIMATION/Name",
-                "strval": "PLAY ANIMATION",
-                "InheritedType": 10
-              },
-              {
-                "nid": 2136164940,
-                "strtype": "PLAY ANIMATION/FunctionName",
-                "strval": "AniImgSeconde_Animation",
-                "InheritedType": 10
-              },
-              {
-                "nid": -45821047,
-                "strtype": "PLAY ANIMATION/Animation",
-                "strval": "AniImgSeconde",
-                "InheritedType": 8
-              },
-              {
-                "nid": -630491014,
-                "strtype": "PLAY ANIMATION/Target",
-                "strval": "GUID69068838-187522S45935",
-                "InheritedType": 9
-              },
-              {
-                "nid": 407758153,
-                "strtype": "PLAY ANIMATION/Delay",
-                "InheritedType": 6
-              },
-              {
-                "nid": -831609188,
-                "strtype": "PLAY ANIMATION/Call",
-                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
-                "InheritedType": 10
-              },
-              {
-                "nid": 1562560312,
-                "strtype": "PLAY ANIMATION/CallC",
-                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
-                "InheritedType": 10
-              }
-            ],
-            "InheritedType": 10
-          }
-        ],
-        "InheritedType": 4
-      },
-      {
-        "disabled": false,
         "nid": -1403154744,
         "strtype": "_event/EventHandler",
         "strval": "SCREEN_LOAD_START",
@@ -7634,7 +7555,7 @@
             },
             {
               "Value": 3600,
-              "Time": 36000.0,
+              "Time": 54000.0,
               "InheritedType": 1
             }
           ],
@@ -7694,7 +7615,7 @@
             {
               "nid": 356754370,
               "strtype": "PROPERTYANIMATION/Duration",
-              "integer": 36000,
+              "integer": 54000,
               "InheritedType": 6
             },
             {
@@ -7706,7 +7627,7 @@
             {
               "nid": 614902546,
               "strtype": "PROPERTYANIMATION/FullAnimationDuration",
-              "integer": 36000,
+              "integer": 54000,
               "InheritedType": 6
             },
             {
@@ -8725,7 +8646,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 205,
+    "backup_cnt": 208,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

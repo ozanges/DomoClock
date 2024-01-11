@@ -58,7 +58,7 @@ void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay)
     PropertyAnimation_0_user_data->val = -1;
     lv_anim_t PropertyAnimation_0;
     lv_anim_init(&PropertyAnimation_0);
-    lv_anim_set_time(&PropertyAnimation_0, 36000);
+    lv_anim_set_time(&PropertyAnimation_0, 54000);
     lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_image_angle);
     lv_anim_set_values(&PropertyAnimation_0, 0, 3600);
@@ -185,9 +185,6 @@ void ui_event____initial_actions0(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
-        AniImgSeconde_Animation(ui_ImgSeconde, 0);
-    }
     if(event_code == LV_EVENT_SCREEN_LOAD_START) {
         AniGpHour_Animation(ui_GpHour, 0);
     }
