@@ -2,13 +2,23 @@
 #include <TFT_eSPI.h>
 #include <ui.h>
 #include "CST816S.h"
-#include <SoftwareSerial.h>
-
+#include "communication.h"
 #include <time.h>
 #include <sys/time.h>
 
-#include <ArduinoJson.h>
+struct RequestData{
+  char key[5];
+  int  previousMillis;
+  int  refreshDelay;
+};
 
+struct ResponseData{
+  char *key;
+  const char *value;
+};
+
+#define  DATALIST_SIZE 8
+RequestData _dataList[DATALIST_SIZE];
 
 /*Don't forget to set Sketchbook location in File/Preferencesto the path of your UI project (the parent foder of this INO file)*/
 
@@ -24,11 +34,12 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 void Touch_INT_callback();
 uint8_t flag = 0;
 
-const byte txPin = 27;
-const byte rxPin = 28;
+const byte _txPin = 27;
+const byte _rxPin = 28;
 
-SoftwareSerial mySerial (rxPin, txPin);
-int myIndex = 0;
+//SoftwareSerial mySerial (rxPin, txPin);
+Communication _serial(_rxPin, _txPin);
+
 
 long            _delayTX            = 1000;
 unsigned long   _previousTXMillis   = 0;
@@ -96,6 +107,17 @@ void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
 
 void setup()
 {
+    _dataList[0] = {"ep", millis(), 5000};
+    _dataList[1] = {"actp", millis(), 9000};
+    _dataList[2] = {"mitp", millis(), 9500};
+    _dataList[3] = {"matp", millis(), 15000};
+    _dataList[4] = {"as", millis(), 12000};
+    _dataList[5] = {"hp", millis(), 12500};
+    _dataList[6] = {"lp", millis(), 13000};
+    _dataList[7] = {"gp", millis(), 13500};
+    // Data data0 = {"ep", 0};
+    // Data data1 = {"ep", 1};
+
     Serial.begin( 115200 ); /* prepare for possible serial debug */
 
     if (DEV_Module_Init() != 0)
@@ -119,9 +141,10 @@ void setup()
     lv_log_register_print_cb( my_print ); /* register print function for debugging */
 #endif
 
-    pinMode(rxPin, INPUT);
-    pinMode(txPin, OUTPUT);
-    mySerial.begin(115200);
+    // pinMode(rxPin, INPUT);
+    // pinMode(txPin, OUTPUT);
+    // mySerial.begin(115200);
+    _serial.setup();
 
     tft.begin();          /* TFT init */
     tft.setRotation( 0 ); /* Landscape orientation, flipped */
@@ -183,16 +206,64 @@ void loop()
   lv_timer_handler(); /* let the GUI do its work */
   delay(5);
 
-  // while (mySerial.available() > 0) {
-  //   char recieved  = mySerial.read();
-  //   if (recieved == '/i') {
-  //     Serial.println("a");
-  //   } else {
-  //     Serial.println(recieved);
-  //   }
-  // }
+  if (_serial.listen()) {
+    char * message = _serial.getMessage();
+    Serial.print(F("Received: ")); Serial.println(message);
+    const char delimiter[2] = ":";
+
+    ResponseData response = ResponseData();
+    response.key = strtok(message, delimiter);
+    response.value = strtok(NULL, delimiter);
+    // Serial.print("** Response key=");
+    // Serial.print(response.key);
+    // Serial.print(";value=");
+    // Serial.println(response.value);
+    if (strcmp(response.key, "ep") == 0)  {
+      struct timeval tv;
+      tv.tv_sec = strtoll(response.value, NULL, 10);
+      tv.tv_usec = 0;
+      settimeofday(&tv, nullptr);
+    } else if (strcmp(response.key, "actp") == 0)  {
+      actualTemperature = strtof(response.value, NULL);
+    } else if (strcmp(response.key, "mitp") == 0)  {
+      minTemperature = strtof(response.value, NULL);
+    } else if (strcmp(response.key, "matp") == 0)  {
+      maxTemperature = strtof(response.value, NULL);
+    } else if (strcmp(response.key, "as") == 0)  {
+      actualStatus = response.value;
+    } else if (strcmp(response.key, "hp") == 0)  {
+      houseTodayPricePercentage = atoi(response.value);
+    } else if (strcmp(response.key, "lp") == 0)  {
+      laundryTodayPricePercentage = atoi(response.value);
+    } else if (strcmp(response.key, "gp") == 0)  {
+      garageTodayPricePercentage = atoi(response.value);
+    } else {
+      Serial.println("Unknown data response !");
+    }
+  }
 
   unsigned long currentMillis = millis();
+  for (int i = 0; i < DATALIST_SIZE; i++) {
+    currentMillis = millis();
+    if (currentMillis - _dataList[i].previousMillis >= _dataList[i].refreshDelay) {
+      _dataList[i].previousMillis = currentMillis;
+
+      Serial.print("************ ASKING FOR : ");
+      Serial.println(_dataList[i].key);
+      _serial.sendMessage(_dataList[i].key);
+
+      // Serial.print("i=");
+      // Serial.print(i);
+      // Serial.print(";key=");
+      // Serial.print(_dataList[i].key);
+      // Serial.print(";previousMillis=");
+      // Serial.print(_dataList[i].previousMillis);
+      // Serial.print(";refreshDelay=");
+      // Serial.println(_dataList[i].refreshDelay);
+    }
+  }
+
+  currentMillis = millis();
   if (currentMillis - _previousTXMillis >= _delayTX) {
     _previousTXMillis = currentMillis;
     
@@ -201,7 +272,7 @@ void loop()
 
     time(&now);
     strftime(buff, sizeof(buff), "%c", localtime(&now));
-    Serial.println(buff);
+    //Serial.println(buff);
 
     char dayOfWeek[4];
     char month[4];
@@ -214,12 +285,12 @@ void loop()
     sprintf(formattedMinute, "%02d", minute);
 
     // Affichage des résultats
-    Serial.print("Jour de la semaine : "); Serial.println(dayOfWeek);
-    Serial.print("Mois : "); Serial.println(month);
-    Serial.print("Jour du mois : "); Serial.println(day);
-    Serial.print("Heure : "); Serial.print(hour); Serial.print(":"); Serial.print(minute); Serial.print(":"); Serial.println(second);
-    Serial.print("Année : "); Serial.println(year);
-    Serial.print("formattedMinute : "); Serial.println(formattedMinute);
+    // Serial.print("Jour de la semaine : "); Serial.println(dayOfWeek);
+    // Serial.print("Mois : "); Serial.println(month);
+    // Serial.print("Jour du mois : "); Serial.println(day);
+    // Serial.print("Heure : "); Serial.print(hour); Serial.print(":"); Serial.print(minute); Serial.print(":"); Serial.println(second);
+    // Serial.print("Année : "); Serial.println(year);
+    // Serial.print("formattedMinute : "); Serial.println(formattedMinute);
 
     int firstHour = hour / 10;
     int secondHour = hour % 10;
@@ -255,45 +326,10 @@ void loop()
     color = lv_color_make(rouge, vert, bleu);
     lv_obj_set_style_arc_color(ui_ArcThirdElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   }
-
-  if (!_isFirstTimeSet) {
-    String data = "";
-    while (mySerial.available() > 0) {
-      data = mySerial.readStringUntil('\n');
-    }
-
-    if (data.length() > 0) {
-      Serial.println(data);
-      StaticJsonDocument<128> doc;
-      DeserializationError    error = deserializeJson(doc, data);
-      if (error) {
-        Serial.print(F("RX() deserializeJson() failed: "));
-        Serial.println(error.f_str());
-        //return false;
-      } else {
-        struct timeval tv;
-        tv.tv_sec = doc["ep"]; // Jan 21, 2021  3:14:15AM ...RPi Pico Release;
-        tv.tv_usec = 0;
-        settimeofday(&tv, nullptr);
-
-        actualTemperature = doc["actp"];
-        minTemperature = doc["mitp"];
-        maxTemperature = doc["matp"];
-        String actualStatusJson = doc["as"];
-        actualStatus = actualStatusJson;
-        houseTodayPricePercentage = doc["hp"];
-        laundryTodayPricePercentage = doc["lp"];
-        garageTodayPricePercentage = doc["gp"];
-
-        _isFirstTimeSet = true;
-      }
-    }
-  }
 }
 
 void Touch_INT_callback()
 {
-
     if (Touch_CTS816.mode == CST816S_Gesture_Mode)
     {
         uint8_t gesture = CST816S_Get_Gesture();
