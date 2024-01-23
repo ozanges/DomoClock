@@ -6,3 +6,7 @@
 **/build/**/*.uf2
 **/*.bak
 **/secrets.h
+
+**/ArduinoData*
+**/bin
+**/obj
