@@ -107,13 +107,28 @@ void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
     }
 }
 
-// void TFT_SET_BL(uint8_t Value) {
-//   if (Value < 0 || Value > 100) {
-//     printf("TFT_SET_BL Error \r\n");
-//   } else {
-//     analogWrite(TFT_BL, Value * 2.55);
-//   }
-// }
+void TFT_SET_BL(uint8_t Value) {
+  if (Value < 0 || Value > 100) {
+    printf("TFT_SET_BL Error \r\n");
+  } else {
+    analogWrite(TFT_BL, Value * 2.55);
+  }
+}
+
+int _tft_backlight_value = 0;
+
+void OnBackgrounClicked(lv_event_t * e)
+{
+	if (_tft_backlight_value < 100) {
+		_tft_backlight_value = _tft_backlight_value + 15;
+	}
+
+	if (_tft_backlight_value > 100) {
+		_tft_backlight_value = 0;
+	}
+
+	TFT_SET_BL(_tft_backlight_value);
+}
 
 void setup()
 {

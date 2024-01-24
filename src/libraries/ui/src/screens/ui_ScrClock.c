@@ -36,7 +36,7 @@ void ui_ScrClock_screen_init(void)
     ui_GpHour = lv_obj_create(ui_ScrClock);
     lv_obj_set_width(ui_GpHour, 135);
     lv_obj_set_height(ui_GpHour, 135);
-    lv_obj_clear_flag(ui_GpHour, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_GpHour, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_GpHour, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_GpHour, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_GpHour, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -105,7 +105,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlCalendar, 67);
     lv_obj_set_y(ui_PnlCalendar, -64);
     lv_obj_set_align(ui_PnlCalendar, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlCalendar, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlCalendar, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlCalendar, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -150,7 +150,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlActualWeather, -33);
     lv_obj_set_y(ui_PnlActualWeather, 21);
     lv_obj_set_align(ui_PnlActualWeather, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlActualWeather, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlActualWeather, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlActualWeather, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlActualWeather, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlActualWeather, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -184,7 +184,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlTemperature, 0);
     lv_obj_set_y(ui_PnlTemperature, 55);
     lv_obj_set_align(ui_PnlTemperature, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlTemperature, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlTemperature, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlTemperature, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -218,7 +218,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_width(ui_PnlElectricity, 170);
     lv_obj_set_height(ui_PnlElectricity, 115);
     lv_obj_set_align(ui_PnlElectricity, LV_ALIGN_BOTTOM_LEFT);
-    lv_obj_clear_flag(ui_PnlElectricity, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlElectricity, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlElectricity, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlElectricity, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -288,5 +288,7 @@ void ui_ScrClock_screen_init(void)
 
     lv_obj_set_style_bg_color(ui_ArcThirdElectricity, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_ArcThirdElectricity, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_ScrClock, ui_event_ScrClock, LV_EVENT_ALL, NULL);
 
 }
