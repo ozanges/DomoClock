@@ -13,8 +13,7 @@
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
-
-long            _delayTX                      = 2000;
+long            _delayTX                      = 30 * 1000; // 30 sec
 unsigned long   _previousTXMillis             = 0;
 int             _wifiProblemDeepSleepDuration = 150; // 2min30
 String          weekDays[7]                   = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
