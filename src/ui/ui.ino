@@ -52,6 +52,7 @@ String actualStatus                 = "";
 int houseTodayPricePercentage       = 0;
 int laundryTodayPricePercentage     = 0;
 int garageTodayPricePercentage      = 0;
+bool _isEpochFirstValidation        = true;
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -116,7 +117,7 @@ void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
 
 void setup()
 {
-    _dataList[0] = {"ep", millis(), 5 * 60 * 1000, 0}; // 5 min
+    _dataList[0] = {"ep", millis(), /*5 * 60*/ 30 * 1000, 0}; // 5 min
     _dataList[1] = {"actp", millis(), 2 * 60 * 1000, 0}; // 2 min
     _dataList[2] = {"mitp", millis(), 2 * 60 * 1000, 0};
     _dataList[3] = {"matp", millis(), 2 * 60 * 1000, 0};
@@ -188,6 +189,8 @@ void setup()
     tv.tv_usec = 0;
     settimeofday(&tv, nullptr);
 
+    delay(7000); // delay for start SerialLog
+
     Serial.println( "Setup done" );
 }
 
@@ -222,6 +225,35 @@ void displayDataListValue(String title) {
   Serial.println();
 }
 
+bool is_valid_timestamp(const char *str) {
+    // Vérifier que la chaîne ne contient que des chiffres
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (!isdigit(str[i])) {
+            Serial.println("timestamp : valeur non numérique");
+            return false;
+        }
+    }
+
+    // Vérifier la plage de la valeur (optionnel, ajustez selon vos besoins)
+    long long timestamp = strtoll(str, NULL, 10);
+    if (strlen(str) != 10 || timestamp < 0 /* || timestamp > time(NULL)*/) {
+        Serial.println("timestamp : incohérence de valeur");
+        return false;
+    }
+
+    if (!_isEpochFirstValidation) {
+      time_t now = time(NULL);
+      Serial.print("time(NULL) = ");
+      Serial.println(now);
+      if (timestamp < now - (5 * 60)  || timestamp > now + (5 * 60)) {
+        Serial.println("timestamp : différence de valeur trop grande.");
+        return false;
+      }
+    }
+
+    return true;
+}
+
 void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
@@ -240,15 +272,18 @@ void loop()
     // Serial.print(";value=");
     // Serial.println(response.value);
 
-    bool mustAknowledgeState = true;
+    bool mustAknowledgeState = false;
     if (strcmp(response.key, "ep") == 0)  {
       struct timeval tv;
-      tv.tv_sec = strtoll(response.value, NULL, 10);
-      tv.tv_usec = 0;
-      settimeofday(&tv, nullptr);
-      mustAknowledgeState = true;
-      Serial.print("epoch=");
-      Serial.println(tv.tv_sec);
+      if (is_valid_timestamp(response.value)) {
+        tv.tv_sec = strtoll(response.value, NULL, 10);
+        tv.tv_usec = 0;
+        settimeofday(&tv, nullptr);
+        mustAknowledgeState = true;
+        Serial.print("epoch=");
+        Serial.println(tv.tv_sec);
+        _isEpochFirstValidation = false;
+      } 
     } else if (strcmp(response.key, "actp") == 0)  {
       actualTemperature = strtof(response.value, NULL);
       Serial.print("actualTemperature=");
@@ -340,9 +375,7 @@ void loop()
         _serial.sendMessage(_dataList[i].key);
         _dataList[i].acknowledgeState = 1;
 
-        if (mustBeInitialized) {
-          break;
-        }
+        break;
         // Serial.print("i=");
         // Serial.print(i);
         // Serial.print(";key=");

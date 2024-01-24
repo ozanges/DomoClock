@@ -231,6 +231,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_y(ui_ArcMainElectricity, -74);
     lv_obj_set_align(ui_ArcMainElectricity, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_ArcMainElectricity, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_ArcMainElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_value(ui_ArcMainElectricity, 90);
     lv_arc_set_bg_angles(ui_ArcMainElectricity, 97, 160);
     lv_obj_set_style_border_color(ui_ArcMainElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -254,6 +255,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_ArcSecondElectricity, 55);
     lv_obj_set_y(ui_ArcSecondElectricity, -81);
     lv_obj_set_align(ui_ArcSecondElectricity, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_ArcSecondElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_value(ui_ArcSecondElectricity, 50);
     lv_arc_set_bg_angles(ui_ArcSecondElectricity, 100, 135);
     lv_obj_set_style_arc_color(ui_ArcSecondElectricity, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -273,6 +275,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_ArcThirdElectricity, 61);
     lv_obj_set_y(ui_ArcThirdElectricity, -88);
     lv_obj_set_align(ui_ArcThirdElectricity, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_ArcThirdElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_value(ui_ArcThirdElectricity, 80);
     lv_arc_set_bg_angles(ui_ArcThirdElectricity, 103, 120);
     lv_obj_set_style_arc_color(ui_ArcThirdElectricity, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
