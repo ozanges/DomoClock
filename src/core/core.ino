@@ -141,13 +141,13 @@ void loop() {
     timeClient.update();
 		_previousTXMillis = currentMillis;
 
-    _actualTemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1313");
-    _minTemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1302");
-    _maxtemperature = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=1303");
-    _actualStatus = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3084");
-    _houseTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3090");
-    _laundryTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3088");
-    _garageTodayPricePercentage = getWebData("http://192.168.1.50/core/api/jeeApi.php?apikey=ffZimVXpb3Brc1xHeCex7iGsW70GXJXB&type=cmd&id=3089");
+    _actualTemperature = getWebData(DATA_01_URL);
+    _minTemperature = getWebData(DATA_02_URL);
+    _maxtemperature = getWebData(DATA_03_URL);
+    _actualStatus = getWebData(DATA_04_URL);
+    _houseTodayPricePercentage = getWebData(DATA_05_URL);
+    _laundryTodayPricePercentage = getWebData(DATA_06_URL);
+    _garageTodayPricePercentage = getWebData(DATA_07_URL);
 
     Serial.print(F("Free heap : "));
     Serial.println(ESP.getFreeHeap());
