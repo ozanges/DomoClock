@@ -341,7 +341,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  45,
+                  58,
                   6
                 ],
                 "InheritedType": 7
@@ -364,7 +364,6 @@
               },
               {
                 "nid": -223046095,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -658,8 +657,8 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -38,
-                      22
+                      -35,
+                      21
                     ],
                     "InheritedType": 7
                   },
@@ -676,11 +675,12 @@
                   {
                     "nid": 1349071271,
                     "strtype": "OBJECT/Align",
-                    "strval": "LEFT_MID",
+                    "strval": "CENTER",
                     "InheritedType": 3
                   },
                   {
                     "nid": 395554643,
+                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -818,6 +818,7 @@
                   },
                   {
                     "nid": -696795272,
+                    "flags": 1048576,
                     "strtype": "OBJECT/States",
                     "InheritedType": 1
                   },
@@ -883,7 +884,7 @@
                   {
                     "nid": 779492622,
                     "strtype": "LABEL/Text",
-                    "strval": "0",
+                    "strval": "2",
                     "InheritedType": 10
                   },
                   {
@@ -969,7 +970,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      41,
+                      47,
                       21
                     ],
                     "InheritedType": 7
@@ -992,7 +993,6 @@
                   },
                   {
                     "nid": 1373352891,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -1196,7 +1196,7 @@
                   {
                     "nid": 1042973129,
                     "strtype": "LABEL/Text",
-                    "strval": "3",
+                    "strval": "2",
                     "InheritedType": 10
                   },
                   {
@@ -1303,7 +1303,6 @@
               },
               {
                 "nid": 695294703,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -1316,7 +1315,7 @@
               {
                 "nid": -1254833395,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -1541,8 +1540,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID28683668-595914S33135",
@@ -2459,8 +2457,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID44178174-941014S64335",
@@ -2505,7 +2502,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -20,
+                      -15,
                       -15
                     ],
                     "InheritedType": 7
@@ -2523,12 +2520,11 @@
                   {
                     "nid": -1791336237,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
                     "nid": 1293992861,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -2835,12 +2831,11 @@
                   {
                     "nid": 32450124,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
                     "nid": 1062881492,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -3129,7 +3124,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      -21,
+                      -15,
                       14
                     ],
                     "InheritedType": 7
@@ -3147,7 +3142,7 @@
                   {
                     "nid": 1181843539,
                     "strtype": "OBJECT/Align",
-                    "strval": "CENTER",
+                    "strval": "LEFT_MID",
                     "InheritedType": 3
                   },
                   {
@@ -3440,7 +3435,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  40,
+                  67,
                   -64
                 ],
                 "InheritedType": 7
@@ -3463,7 +3458,6 @@
               },
               {
                 "nid": -860348404,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -3476,7 +3470,7 @@
               {
                 "nid": -1972589660,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -3701,8 +3695,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID95671727-668017S36235",
@@ -4375,7 +4368,6 @@
               },
               {
                 "nid": -1217553806,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -4388,7 +4380,7 @@
               {
                 "nid": -921158099,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -4613,8 +4605,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID27240829-389271S97536",
@@ -5305,7 +5296,6 @@
               },
               {
                 "nid": -2005355915,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -5318,7 +5308,7 @@
               {
                 "nid": -674586347,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -5543,8 +5533,7 @@
                 "InheritedType": 11
               }
             ],
-            "saved_objtypeKey": "PANEL",
-            "tree_closed": true
+            "saved_objtypeKey": "PANEL"
           },
           {
             "guid": "GUID88528955-391394S46536",
@@ -5612,7 +5601,6 @@
                   },
                   {
                     "nid": -1238202825,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -5625,7 +5613,7 @@
                   {
                     "nid": -1564108776,
                     "strtype": "OBJECT/Clickable",
-                    "strval": "True",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -6027,7 +6015,6 @@
                   },
                   {
                     "nid": 1018072167,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -6040,7 +6027,7 @@
                   {
                     "nid": -1146313680,
                     "strtype": "OBJECT/Clickable",
-                    "strval": "True",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -6266,6 +6253,17 @@
                         "strval": "DEFAULT",
                         "childs": [
                           {
+                            "nid": 375040055,
+                            "strtype": "_style/Arc_Color",
+                            "intarray": [
+                              48,
+                              48,
+                              48,
+                              255
+                            ],
+                            "InheritedType": 7
+                          },
+                          {
                             "nid": -1169738526,
                             "strtype": "_style/Arc_Width",
                             "integer": 6,
@@ -6408,7 +6406,6 @@
                   },
                   {
                     "nid": -1976506249,
-                    "flags": 1048576,
                     "strtype": "OBJECT/Flags",
                     "InheritedType": 1
                   },
@@ -6421,7 +6418,7 @@
                   {
                     "nid": -2017440182,
                     "strtype": "OBJECT/Clickable",
-                    "strval": "True",
+                    "strval": "False",
                     "InheritedType": 2
                   },
                   {
@@ -6615,7 +6612,7 @@
                   {
                     "nid": -872551934,
                     "strtype": "ARC/Value",
-                    "integer": 50,
+                    "integer": 80,
                     "InheritedType": 6
                   },
                   {
@@ -6646,6 +6643,17 @@
                         "strtype": "_style/StyleState",
                         "strval": "DEFAULT",
                         "childs": [
+                          {
+                            "nid": -1180996733,
+                            "strtype": "_style/Arc_Color",
+                            "intarray": [
+                              48,
+                              48,
+                              48,
+                              255
+                            ],
+                            "InheritedType": 7
+                          },
                           {
                             "nid": 705655721,
                             "strtype": "_style/Arc_Width",
@@ -6787,7 +6795,6 @@
               },
               {
                 "nid": -1815542136,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -6800,7 +6807,7 @@
               {
                 "nid": 1127525862,
                 "strtype": "OBJECT/Clickable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -7062,7 +7069,6 @@
           },
           {
             "nid": 2076394322,
-            "flags": 1048576,
             "strtype": "OBJECT/Flags",
             "InheritedType": 1
           },
@@ -7251,6 +7257,71 @@
             "strtype": "SCREEN/Don't export screen",
             "strval": "False",
             "InheritedType": 2
+          },
+          {
+            "disabled": false,
+            "nid": -1641514484,
+            "strtype": "SCREEN/EventHandler",
+            "strval": "CLICKED",
+            "childs": [
+              {
+                "nid": -1262758665,
+                "strtype": "_custom/name",
+                "strval": "BackgrounClicked",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1333460803,
+                "strtype": "_custom/condition_C",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1469863937,
+                "strtype": "_custom/condition_P",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1973816415,
+                "strtype": "_custom/action",
+                "strval": "CALL FUNCTION",
+                "childs": [
+                  {
+                    "nid": -1654883667,
+                    "strtype": "CALL FUNCTION/Name",
+                    "strval": "CALL FUNCTION",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -423586618,
+                    "strtype": "CALL FUNCTION/Call",
+                    "strval": "<{Function_name}>( event_struct )",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -2017980188,
+                    "strtype": "CALL FUNCTION/CallC",
+                    "strval": "<{Function_name}>( e );",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -890521587,
+                    "strtype": "CALL FUNCTION/Function_name",
+                    "strval": "OnBackgrounClicked",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1786522753,
+                    "strtype": "CALL FUNCTION/Dont_export_function",
+                    "strval": "True",
+                    "InheritedType": 2
+                  }
+                ],
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 4
           }
         ],
         "saved_objtypeKey": "SCREEN"
@@ -7263,82 +7334,6 @@
         "strtype": "STARTEVENTS/Name",
         "strval": "___initial_actions0",
         "InheritedType": 10
-      },
-      {
-        "disabled": false,
-        "nid": -779893153,
-        "strtype": "_event/EventHandler",
-        "strval": "SCREEN_LOAD_START",
-        "childs": [
-          {
-            "nid": -1560871800,
-            "strtype": "_custom/name",
-            "strval": "EvtImgSeconde",
-            "InheritedType": 10
-          },
-          {
-            "nid": 1870219147,
-            "strtype": "_custom/condition_C",
-            "strval": "",
-            "InheritedType": 10
-          },
-          {
-            "nid": 607891861,
-            "strtype": "_custom/condition_P",
-            "strval": "",
-            "InheritedType": 10
-          },
-          {
-            "nid": 871193036,
-            "strtype": "_event/action",
-            "strval": "PLAY ANIMATION",
-            "childs": [
-              {
-                "nid": -353294158,
-                "strtype": "PLAY ANIMATION/Name",
-                "strval": "PLAY ANIMATION",
-                "InheritedType": 10
-              },
-              {
-                "nid": 2136164940,
-                "strtype": "PLAY ANIMATION/FunctionName",
-                "strval": "AniImgSeconde_Animation",
-                "InheritedType": 10
-              },
-              {
-                "nid": -45821047,
-                "strtype": "PLAY ANIMATION/Animation",
-                "strval": "AniImgSeconde",
-                "InheritedType": 8
-              },
-              {
-                "nid": -630491014,
-                "strtype": "PLAY ANIMATION/Target",
-                "strval": "GUID69068838-187522S45935",
-                "InheritedType": 9
-              },
-              {
-                "nid": 407758153,
-                "strtype": "PLAY ANIMATION/Delay",
-                "InheritedType": 6
-              },
-              {
-                "nid": -831609188,
-                "strtype": "PLAY ANIMATION/Call",
-                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>)",
-                "InheritedType": 10
-              },
-              {
-                "nid": 1562560312,
-                "strtype": "PLAY ANIMATION/CallC",
-                "strval": "<{FunctionName}>(<{Target}>, <{Delay}>);",
-                "InheritedType": 10
-              }
-            ],
-            "InheritedType": 10
-          }
-        ],
-        "InheritedType": 4
       },
       {
         "disabled": false,
@@ -7495,7 +7490,7 @@
       {
         "disabled": false,
         "nid": -1690659325,
-        "strtype": "STARTEVENTS/EventHandler",
+        "strtype": "_event/EventHandler",
         "strval": "SCREEN_LOAD_START",
         "childs": [
           {
@@ -7518,7 +7513,7 @@
           },
           {
             "nid": 50736367,
-            "strtype": "_custom/action",
+            "strtype": "_event/action",
             "strval": "PLAY ANIMATION",
             "childs": [
               {
@@ -7567,7 +7562,7 @@
           },
           {
             "nid": -954768906,
-            "strtype": "_custom/action",
+            "strtype": "_event/action",
             "strval": "PLAY ANIMATION",
             "childs": [
               {
@@ -7633,7 +7628,7 @@
             },
             {
               "Value": 3600,
-              "Time": 36000.0,
+              "Time": 54000.0,
               "InheritedType": 1
             }
           ],
@@ -7693,7 +7688,7 @@
             {
               "nid": 356754370,
               "strtype": "PROPERTYANIMATION/Duration",
-              "integer": 36000,
+              "integer": 54000,
               "InheritedType": 6
             },
             {
@@ -7705,7 +7700,7 @@
             {
               "nid": 614902546,
               "strtype": "PROPERTYANIMATION/FullAnimationDuration",
-              "integer": 36000,
+              "integer": 54000,
               "InheritedType": 6
             },
             {
@@ -8724,7 +8719,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 201,
+    "backup_cnt": 217,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

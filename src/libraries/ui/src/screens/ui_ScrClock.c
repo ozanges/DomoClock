@@ -25,7 +25,7 @@ void ui_ScrClock_screen_init(void)
     ui_LbMinute00 = lv_label_create(ui_ScrClock);
     lv_obj_set_width(ui_LbMinute00, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbMinute00, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbMinute00, 45);
+    lv_obj_set_x(ui_LbMinute00, 58);
     lv_obj_set_y(ui_LbMinute00, 6);
     lv_obj_set_align(ui_LbMinute00, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LbMinute00, "27");
@@ -36,7 +36,7 @@ void ui_ScrClock_screen_init(void)
     ui_GpHour = lv_obj_create(ui_ScrClock);
     lv_obj_set_width(ui_GpHour, 135);
     lv_obj_set_height(ui_GpHour, 135);
-    lv_obj_clear_flag(ui_GpHour, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_GpHour, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_GpHour, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_GpHour, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_GpHour, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -45,10 +45,10 @@ void ui_ScrClock_screen_init(void)
     ui_LbHour0h = lv_label_create(ui_GpHour);
     lv_obj_set_width(ui_LbHour0h, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbHour0h, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbHour0h, -38);
-    lv_obj_set_y(ui_LbHour0h, 22);
-    lv_obj_set_align(ui_LbHour0h, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LbHour0h, "0");
+    lv_obj_set_x(ui_LbHour0h, -35);
+    lv_obj_set_y(ui_LbHour0h, 21);
+    lv_obj_set_align(ui_LbHour0h, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_LbHour0h, "2");
     lv_obj_set_style_text_color(ui_LbHour0h, lv_color_hex(0x393939), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbHour0h, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_LbHour0h, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -56,10 +56,10 @@ void ui_ScrClock_screen_init(void)
     ui_LbHourh0 = lv_label_create(ui_GpHour);
     lv_obj_set_width(ui_LbHourh0, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbHourh0, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbHourh0, 41);
+    lv_obj_set_x(ui_LbHourh0, 47);
     lv_obj_set_y(ui_LbHourh0, 21);
     lv_obj_set_align(ui_LbHourh0, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LbHourh0, "3");
+    lv_label_set_text(ui_LbHourh0, "2");
     lv_obj_set_style_text_color(ui_LbHourh0, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbHourh0, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_LbHourh0, &ui_font_Montserrat_light_120, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -102,10 +102,10 @@ void ui_ScrClock_screen_init(void)
     ui_PnlCalendar = lv_obj_create(ui_ScrClock);
     lv_obj_set_width(ui_PnlCalendar, 100);
     lv_obj_set_height(ui_PnlCalendar, 50);
-    lv_obj_set_x(ui_PnlCalendar, 40);
+    lv_obj_set_x(ui_PnlCalendar, 67);
     lv_obj_set_y(ui_PnlCalendar, -64);
     lv_obj_set_align(ui_PnlCalendar, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlCalendar, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlCalendar, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlCalendar, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlCalendar, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -114,9 +114,9 @@ void ui_ScrClock_screen_init(void)
     ui_LbDayOfWeek = lv_label_create(ui_PnlCalendar);
     lv_obj_set_width(ui_LbDayOfWeek, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbDayOfWeek, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbDayOfWeek, -20);
+    lv_obj_set_x(ui_LbDayOfWeek, -15);
     lv_obj_set_y(ui_LbDayOfWeek, -15);
-    lv_obj_set_align(ui_LbDayOfWeek, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbDayOfWeek, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbDayOfWeek, "MON");
     lv_obj_set_style_text_color(ui_LbDayOfWeek, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbDayOfWeek, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -127,7 +127,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_height(ui_LbDate, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_LbDate, -15);
     lv_obj_set_y(ui_LbDate, 0);
-    lv_obj_set_align(ui_LbDate, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbDate, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbDate, "18 FEB");
     lv_obj_set_style_text_color(ui_LbDate, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbDate, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -136,9 +136,9 @@ void ui_ScrClock_screen_init(void)
     ui_LbYear = lv_label_create(ui_PnlCalendar);
     lv_obj_set_width(ui_LbYear, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LbYear, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_LbYear, -21);
+    lv_obj_set_x(ui_LbYear, -15);
     lv_obj_set_y(ui_LbYear, 14);
-    lv_obj_set_align(ui_LbYear, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_LbYear, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LbYear, "2022");
     lv_obj_set_style_text_color(ui_LbYear, lv_color_hex(0x6B6B6B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LbYear, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -150,7 +150,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlActualWeather, -33);
     lv_obj_set_y(ui_PnlActualWeather, 21);
     lv_obj_set_align(ui_PnlActualWeather, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlActualWeather, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlActualWeather, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlActualWeather, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlActualWeather, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlActualWeather, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -184,7 +184,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_PnlTemperature, 0);
     lv_obj_set_y(ui_PnlTemperature, 55);
     lv_obj_set_align(ui_PnlTemperature, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_PnlTemperature, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlTemperature, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlTemperature, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -218,7 +218,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_width(ui_PnlElectricity, 170);
     lv_obj_set_height(ui_PnlElectricity, 115);
     lv_obj_set_align(ui_PnlElectricity, LV_ALIGN_BOTTOM_LEFT);
-    lv_obj_clear_flag(ui_PnlElectricity, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_PnlElectricity, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_PnlElectricity, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_PnlElectricity, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_PnlElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -231,6 +231,7 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_y(ui_ArcMainElectricity, -74);
     lv_obj_set_align(ui_ArcMainElectricity, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_ArcMainElectricity, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_ArcMainElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_value(ui_ArcMainElectricity, 90);
     lv_arc_set_bg_angles(ui_ArcMainElectricity, 97, 160);
     lv_obj_set_style_border_color(ui_ArcMainElectricity, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -254,8 +255,11 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_ArcSecondElectricity, 55);
     lv_obj_set_y(ui_ArcSecondElectricity, -81);
     lv_obj_set_align(ui_ArcSecondElectricity, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_ArcSecondElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_arc_set_value(ui_ArcSecondElectricity, 50);
     lv_arc_set_bg_angles(ui_ArcSecondElectricity, 100, 135);
+    lv_obj_set_style_arc_color(ui_ArcSecondElectricity, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcSecondElectricity, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_width(ui_ArcSecondElectricity, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_arc_color(ui_ArcSecondElectricity, lv_color_hex(0xFF8F40), LV_PART_INDICATOR | LV_STATE_DEFAULT);
@@ -271,8 +275,11 @@ void ui_ScrClock_screen_init(void)
     lv_obj_set_x(ui_ArcThirdElectricity, 61);
     lv_obj_set_y(ui_ArcThirdElectricity, -88);
     lv_obj_set_align(ui_ArcThirdElectricity, LV_ALIGN_CENTER);
-    lv_arc_set_value(ui_ArcThirdElectricity, 50);
+    lv_obj_clear_flag(ui_ArcThirdElectricity, LV_OBJ_FLAG_CLICKABLE);      /// Flags
+    lv_arc_set_value(ui_ArcThirdElectricity, 80);
     lv_arc_set_bg_angles(ui_ArcThirdElectricity, 103, 120);
+    lv_obj_set_style_arc_color(ui_ArcThirdElectricity, lv_color_hex(0x303030), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_opa(ui_ArcThirdElectricity, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_arc_width(ui_ArcThirdElectricity, 6, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_arc_color(ui_ArcThirdElectricity, lv_color_hex(0xFF4040), LV_PART_INDICATOR | LV_STATE_DEFAULT);
@@ -281,5 +288,7 @@ void ui_ScrClock_screen_init(void)
 
     lv_obj_set_style_bg_color(ui_ArcThirdElectricity, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_ArcThirdElectricity, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_ScrClock, ui_event_ScrClock, LV_EVENT_ALL, NULL);
 
 }
