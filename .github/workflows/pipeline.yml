@@ -7,5 +7,8 @@ jobs:
   Check-Style:
     uses: ./.github/workflows/check-style.yml
 
-  Build:
-    uses: ./.github/workflows/build.yml
+  Build-ESP8266:
+    uses: ./.github/workflows/build.esp8266.yml
+  
+  Build-RP2040:
+    uses: ./.github/workflows/build.rp2040.yml
