@@ -5,7 +5,7 @@
 
 struct RequestData{
   char key[5];
-  int  previousMillis;
+  long unsigned int  previousMillis;
   int  refreshDelay;
   int  acknowledgeState; // 0 = must be initialized ; 1 = sent notification; 2 = acknowledged
 };
