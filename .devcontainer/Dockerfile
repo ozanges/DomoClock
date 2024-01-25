@@ -6,7 +6,7 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install curl git python3 build-essential
+    && apt-get -y install curl git python3 build-essential clang-format
 
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \

@@ -1,22 +1,36 @@
 {
     "build": {
         "dockerfile": "Dockerfile",
-        "args": { "USERNAME": "${localEnv:USER}" } 
+        "args": {
+            "USERNAME": "${localEnv:USER}"
+        }
     },
     "remoteUser": "${localEnv:USER}",
     "postCreateCommand": "chmod +x /workspaces/DomoClock/build.bash; cp /workspaces/DomoClock/scripts/arduino-cli.yaml /home/${localEnv:USER}/.arduino15/arduino-cli.yaml",
     "customizations": {
         "vscode": {
+            "settings": {
+                "editor.formatOnSave": false,
+                "[cpp]": {
+                    "editor.defaultFormatter": "xaver.clang-format"
+                }
+            },
             "extensions": [
                 "vsciot-vscode.vscode-arduino",
                 "GitHub.vscode-github-actions",
                 "eamodio.gitlens",
-                "PKief.material-icon-theme"
+                "PKief.material-icon-theme",
+                "xaver.clang-format"
             ]
         }
     }
     // ,"forwardPorts": [3000]
-    ,"mounts": [
-        { "source": "projectname-bashhistory", "target": "/commandhistory", "type":"volume" }
+    ,
+    "mounts": [
+        {
+            "source": "projectname-bashhistory",
+            "target": "/commandhistory",
+            "type": "volume"
+        }
     ]
 }
