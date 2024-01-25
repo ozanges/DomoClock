@@ -33,14 +33,15 @@ bool                      _isEpochFirstValidation      = true;
 int                       _tft_backlight_value         = 0;
 RequestData               _dataList[DATALIST_SIZE];
 
-TFT_eSPI                  _tft           = TFT_eSPI(_screenWidth, _screenHeight);
+TFT_eSPI                  _tft = TFT_eSPI(_screenWidth, _screenHeight);
 Communication             _serial(_rxPin, _txPin);
 
-void disp_flush( lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p );
-void on_background_clicked(lv_event_t * e);
-void set_backlight_intensity(uint8_t Value);
-void touch_callback();
-void touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data );
+void compute_color            (uint8_t valeur, uint8_t* rouge, uint8_t* vert, uint8_t* bleu);
+void disp_flush               (lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
+void on_background_clicked    (lv_event_t * e);
+void set_backlight_intensity  (uint8_t Value);
+void touch_callback           ();
+void touchpad_read            (lv_indev_drv_t * indev_driver, lv_indev_data_t * data);
 
 #if LV_USE_LOG != 0
 void my_print(const char * buf)
@@ -122,24 +123,6 @@ void setup()
     Serial.println( "Setup done" );
 }
 
-void calculerCouleur(uint8_t valeur, uint8_t* rouge, uint8_t* vert, uint8_t* bleu) {
-    if (valeur <= 33) {
-        // Vert à Jaune
-        *rouge = map(valeur, 0, 33, 0, 255);
-        *vert = 255;
-        *bleu = 0;
-    } else if (valeur <= 66) {
-        // Jaune à Rouge
-        *rouge = 255;
-        *vert = map(valeur, 34, 66, 255, 0);
-        *bleu = 0;
-    } else {
-        // Rouge
-        *rouge = 255;
-        *vert = 0;
-        *bleu = 0;
-    }
-}
 
 void displayDataListValue(String title) {
   Serial.print(title);
@@ -364,18 +347,37 @@ void loop()
       lv_arc_set_value(ui_ArcThirdElectricity, _garageTodayPricePercentage);
 
       uint8_t rouge, vert, bleu;
-      calculerCouleur(_houseTodayPricePercentage, &rouge, &vert, &bleu);
+      compute_color(_houseTodayPricePercentage, &rouge, &vert, &bleu);
       lv_color_t color = lv_color_make(rouge, vert, bleu);
       lv_obj_set_style_arc_color(ui_ArcMainElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
-      calculerCouleur(_laundryTodayPricePercentage, &rouge, &vert, &bleu);
+      compute_color(_laundryTodayPricePercentage, &rouge, &vert, &bleu);
       color = lv_color_make(rouge, vert, bleu);
       lv_obj_set_style_arc_color(ui_ArcSecondElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
       
-      calculerCouleur(_garageTodayPricePercentage, &rouge, &vert, &bleu);
+      compute_color(_garageTodayPricePercentage, &rouge, &vert, &bleu);
       color = lv_color_make(rouge, vert, bleu);
       lv_obj_set_style_arc_color(ui_ArcThirdElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   }
+}
+
+void compute_color(uint8_t valeur, uint8_t* rouge, uint8_t* vert, uint8_t* bleu) {
+    if (valeur <= 33) {
+        // Vert à Jaune
+        *rouge = map(valeur, 0, 33, 0, 255);
+        *vert = 255;
+        *bleu = 0;
+    } else if (valeur <= 66) {
+        // Jaune à Rouge
+        *rouge = 255;
+        *vert = map(valeur, 34, 66, 255, 0);
+        *bleu = 0;
+    } else {
+        // Rouge
+        *rouge = 255;
+        *vert = 0;
+        *bleu = 0;
+    }
 }
 
 /* Display flushing */
