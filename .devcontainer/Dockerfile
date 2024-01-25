@@ -6,7 +6,7 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install curl git python3
+    && apt-get -y install curl git python3 build-essential
 
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
@@ -32,3 +32,10 @@ COPY .bashrc /home/$USERNAME/
 RUN arduino-cli core update-index \
     && arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json \
     && arduino-cli core install esp8266:esp8266 --additional-urls http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+RUN cd /tmp/ \
+    && git clone https://github.com/szepeviktor/astyle.git \
+    && cd /tmp/astyle/build/gcc/ \
+    && make \
+    && sudo make install \
+    && astyle --version
