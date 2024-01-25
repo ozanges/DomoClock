@@ -187,7 +187,7 @@ void ui_event_ScrClock(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        OnBackgrounClicked(e);
+        on_background_clicked(e);
     }
 }
 void ui_event____initial_actions0(lv_event_t * e)
