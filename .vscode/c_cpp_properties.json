@@ -26,6 +26,7 @@
                 "/home/ozanges/.arduino15/packages/rp2040/hardware/rp2040/3.6.3/libraries/LittleFS/src",
                 "/workspaces/DomoClock/src/libraries/ui/src",
                 "/home/ozanges/.arduino15/packages/rp2040/hardware/rp2040/3.6.3/libraries/Wire/src",
+                "/workspaces/DomoClock/src/libraries/Communication",
                 "/home/ozanges/.arduino15/packages/rp2040/tools/pqt-gcc/2.1.0-a-d3d2e6b/arm-none-eabi/include/c++/12.3.0",
                 "/home/ozanges/.arduino15/packages/rp2040/tools/pqt-gcc/2.1.0-a-d3d2e6b/arm-none-eabi/include/c++/12.3.0/arm-none-eabi/thumb",
                 "/home/ozanges/.arduino15/packages/rp2040/tools/pqt-gcc/2.1.0-a-d3d2e6b/arm-none-eabi/include/c++/12.3.0/backward",

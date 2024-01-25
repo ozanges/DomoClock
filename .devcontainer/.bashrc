@@ -114,6 +114,8 @@ fi
 
 export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history
 
+alias format='find . -name "*.cpp" -o -name "*.c" -o -name "*.h"|xargs -I {} clang-format -i {}'
+
 # echo -e "\033[31m**************************************\033[0m"
 # echo -e "\033[31m*\033[0m"
 # echo -e "\033[31m*\033[0m \033[31mWARNING\033[0m : need to fix Dockerfile arduino-cli install command !"

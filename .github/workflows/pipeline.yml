@@ -4,8 +4,14 @@ jobs:
   Lint:
     uses: ./.github/workflows/lint.yml
 
-  Check-Style:
-    uses: ./.github/workflows/check-style.yml
+  Check-Style-ESP9266:
+    uses: ./.github/workflows/check-style.esp8266.yml
 
-  Build:
-    uses: ./.github/workflows/build.yml
+  Check-Style-RP2040:
+    uses: ./.github/workflows/check-style.rp2040.yml
+
+  Build-ESP8266:
+    uses: ./.github/workflows/build.esp8266.yml
+  
+  Build-RP2040:
+    uses: ./.github/workflows/build.rp2040.yml

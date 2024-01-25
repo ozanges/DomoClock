@@ -1,4 +1,4 @@
-name: Build
+name: Build RP2040
 on: [workflow_call]
 jobs:
   Compute:
@@ -16,5 +16,5 @@ jobs:
           arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
       - name: Compile Sketch
-        run: arduino-cli compile --config-file ./scripts/arduino-cli.yaml --fqbn rp2040:rp2040:waveshare_rp2040_lcd_1_28 ./src/ui/ui.ino
+        run: arduino-cli compile --config-file ./scripts/arduino-cli.rp2040.yaml --fqbn rp2040:rp2040:waveshare_rp2040_lcd_1_28 ./src/ui/ui.ino
         
