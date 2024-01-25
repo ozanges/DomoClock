@@ -12,7 +12,6 @@ void blink(int count)
   }
 }
 
-
 int _negativeDeepSleepMessageCount = 0;
 
 /*
@@ -26,7 +25,7 @@ void deepSleep(int second)
     DPRINT(second);
     DPRINTLN(F(" sec."));
     ESP.deepSleep(second * 1000000);
-  } 
+  }
   else {
     if(_negativeDeepSleepMessageCount++ < MAX_NEGATIVE_DEEPSLEEP_MESSAGE) {
       DPRINTLN(F("second parameter is negative, cannot going to deepsleep."));
