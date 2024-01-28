@@ -6,12 +6,18 @@ using System.Threading;
 namespace SerialLog {
     class Program
     {
+        private static object _lockObj = new object();
+        private static string _logAllFileName = $"./Data/{DateTime.Now:yyyyMMdd_HHmmss}_ALL.txt";
+
         private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             CustomSerialPort serialPort = (CustomSerialPort)sender;        
             string data = serialPort.ReadLine();
             Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {serialPort.ConsolePrefix} - {data}");
             File.AppendAllText(serialPort.FileName, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {data}\n");
+            lock(_lockObj) {
+                File.AppendAllText(_logAllFileName, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {serialPort.ConsolePrefix} - {data}\n");
+            }
         }
 
         private static CustomSerialPort InitSerialPort(string port, int baud, string fileName, string consolePrefix, bool enableRts = false, bool enableDtr = false) {
