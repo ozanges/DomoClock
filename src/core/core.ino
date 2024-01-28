@@ -38,8 +38,8 @@ unsigned long   _previousTimeMillis           = 0;
 unsigned long   _previousMemMillis            = 0;
 int             _wifiProblemDeepSleepDuration = 150; // 2min30
 
-const           byte _txPin = 5;
-const           byte _rxPin = 4;
+const           byte _txPin = 14; //5;
+const           byte _rxPin = 12; //4;
 Communication _serial(_rxPin, _txPin);
 
 void wifiSetup()
