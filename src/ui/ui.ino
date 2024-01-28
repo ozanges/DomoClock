@@ -21,6 +21,8 @@ const byte                _txPin                       = 27;
 const byte                _rxPin                       = 28;
 long                      _delayTX                     = 1000;
 unsigned long             _previousTXMillis            = 0;
+long                      _delayBackLight              = 30 * 1000;
+unsigned long             _previousBackLightMillis     = 0;
 bool                      _isFirstTimeSet              = false;
 float                     _actualTemperature           = 0.0;
 float                     _minTemperature              = 0.0;
@@ -30,7 +32,6 @@ int                       _houseTodayPricePercentage   = 0;
 int                       _laundryTodayPricePercentage = 0;
 int                       _garageTodayPricePercentage  = 0;
 bool                      _isEpochFirstValidation      = true;
-int                       _tft_backlight_value         = 0;
 RequestData               _dataList[DATALIST_SIZE];
 
 TFT_eSPI                  _tft = TFT_eSPI(_screenWidth, _screenHeight);
@@ -255,7 +256,7 @@ void loop()
 
   unsigned long currentMillis = millis();
   if (strcmp(mustAknowledgeData.key, "NULL") != 0) {
-    if (currentMillis - _previousTXMillis >= _delayTX + 1000) {
+    if (currentMillis - _previousTXMillis >= _delayTX) {
       _previousTXMillis = currentMillis;
 
       displayDataListValue("before ask for aknowledgment : ");
@@ -297,7 +298,7 @@ void loop()
   }
 
   currentMillis = millis();
-  if (currentMillis - _previousTXMillis >= _delayTX + 1000) {
+  if (currentMillis - _previousTXMillis >= _delayTX) {
       _previousTXMillis = currentMillis;
 
       time_t now;
@@ -359,6 +360,12 @@ void loop()
       color = lv_color_make(rouge, vert, bleu);
       lv_obj_set_style_arc_color(ui_ArcThirdElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   }
+
+  currentMillis = millis();
+  if (currentMillis - _previousBackLightMillis >= _delayBackLight) {
+      _previousBackLightMillis = currentMillis;
+      set_backlight_intensity(0);
+  }
 }
 
 void compute_color(uint8_t valeur, uint8_t* rouge, uint8_t* vert, uint8_t* bleu) {
@@ -396,15 +403,8 @@ void disp_flush( lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p
 
 void on_background_clicked(lv_event_t * e)
 {
-	if (_tft_backlight_value < 100) {
-		_tft_backlight_value = _tft_backlight_value + 15;
-	}
-
-	if (_tft_backlight_value > 100) {
-		_tft_backlight_value = 0;
-	}
-
-	set_backlight_intensity(_tft_backlight_value);
+  _previousBackLightMillis = millis();;
+  set_backlight_intensity(100);
 }
 
 void set_backlight_intensity(uint8_t Value) {
