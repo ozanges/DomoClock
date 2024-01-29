@@ -21,7 +21,7 @@ struct RequestData {
     int lastComputationTime;
 };
 
-#define  DATALIST_SIZE 10
+#define  DATALIST_SIZE 11
 RequestData _dataList[DATALIST_SIZE] = {
   {"ep", 0, "", 0}
   , {"co2", 0, "", 0}
@@ -33,6 +33,7 @@ RequestData _dataList[DATALIST_SIZE] = {
   , {"hp", 0, DATA_05_URL, 0}
   , {"lp", 0, DATA_06_URL, 0}
   , {"gp", 0, DATA_07_URL, 0}
+  , {"hu", 0, DATA_08_URL, 0}
 };
 
 WiFiUDP ntpUDP;
@@ -163,6 +164,11 @@ void loop() {
           int co2 = mySensor.getCO2();
           Serial.println(("co2:" + String(co2)).c_str());
           _serial.sendMessage(("co2:" + String(co2)).c_str());
+
+          char postDataBuffer[129];
+          snprintf(postDataBuffer, sizeof(postDataBuffer), "%s%d", DATA_50_URL, co2);
+          Serial.println(postDataBuffer);
+          getWebData(postDataBuffer);
         }
         _dataList[i].state = 1;
         Serial.println("Sent co2 value");
@@ -174,6 +180,11 @@ void loop() {
           int tvoc = mySensor.getTVOC();
           Serial.println(("tvoc:" + String(tvoc)).c_str());
           _serial.sendMessage(("tvoc:" + String(tvoc)).c_str());
+
+          char postDataBuffer[129];
+          snprintf(postDataBuffer, sizeof(postDataBuffer), "%s%d", DATA_51_URL, tvoc);
+          Serial.println(postDataBuffer);
+          getWebData(postDataBuffer);
         }
         _dataList[i].state = 1;
         Serial.println("Sent tvoc value");
@@ -201,6 +212,18 @@ void loop() {
 
   currentMillis = millis();
 	if (currentMillis - _previousMemMillis >= _delayMem) {
+    char humidityBuffer[6];
+    snprintf(humidityBuffer, sizeof(humidityBuffer), "%s", getWebData(DATA_08_URL).c_str());
+    float humidity = strtof(humidityBuffer, NULL);
+    Serial.print("Humidity="); Serial.println(humidity);
+
+    char temperatureBuffer[6];
+    snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%s", getWebData(DATA_01_URL).c_str());
+    float temperature = strtof(temperatureBuffer, NULL);
+    Serial.print("Temperature="); Serial.println(temperature);
+
+    mySensor.setEnvironmentalData(humidity, temperature);
+
     Serial.print(F("Free heap : "));
     Serial.println(ESP.getFreeHeap());
     _previousMemMillis = currentMillis;
