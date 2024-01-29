@@ -9,7 +9,7 @@
 #include <TFT_eSPI.h>
 #include <ui.h>
 
-#define  DATALIST_SIZE 8
+#define  DATALIST_SIZE 10
 
 /*Change to your screen resolution*/
 static const uint16_t     _screenWidth  = 240;
@@ -55,13 +55,15 @@ void my_print(const char * buf)
 void setup()
 {
     _dataList[0] = {"ep", millis(), /*5 * 60*/ 30 * 1000, 0}; // 5 min
-    _dataList[1] = {"actp", millis(), 2 * 60 * 1000, 0}; // 2 min
-    _dataList[2] = {"mitp", millis(), 2 * 60 * 1000, 0};
-    _dataList[3] = {"matp", millis(), 2 * 60 * 1000, 0};
-    _dataList[4] = {"as", millis(), 30 * 60 * 1000, 0}; // 30 min
-    _dataList[5] = {"hp", millis(), 5 * 60 * 1000, 0}; // 5 min
-    _dataList[6] = {"lp", millis(), 5 * 60 * 1000, 0}; // 5 min
-    _dataList[7] = {"gp", millis(), 5 * 60 * 1000, 0}; // 5 min
+    _dataList[1] = {"co2", millis(), /*5 * 60*/ 45 * 1000, 0}; // 5 min
+    _dataList[2] = {"tvoc", millis(), /*5 * 60*/ 45 * 1000, 0}; // 5 min
+    _dataList[3] = {"actp", millis(), 2 * 60 * 1000, 0}; // 2 min
+    _dataList[4] = {"mitp", millis(), 2 * 60 * 1000, 0};
+    _dataList[5] = {"matp", millis(), 2 * 60 * 1000, 0};
+    _dataList[6] = {"as", millis(), 30 * 60 * 1000, 0}; // 30 min
+    _dataList[7] = {"hp", millis(), 5 * 60 * 1000, 0}; // 5 min
+    _dataList[8] = {"lp", millis(), 5 * 60 * 1000, 0}; // 5 min
+    _dataList[9] = {"gp", millis(), 5 * 60 * 1000, 0}; // 5 min
 
     Serial.begin( 115200 ); /* prepare for possible serial debug */
 
@@ -192,12 +194,22 @@ void loop()
         Serial.println(tv.tv_sec);
         _isEpochFirstValidation = false;
       } 
+    } else if (strcmp(response.key, "co2") == 0)  {
+      int co2 = atoi(response.value);
+      Serial.print("co2=");
+      Serial.println(co2);
+      mustAknowledgeState = true;
+    } else if (strcmp(response.key, "tvoc") == 0)  {
+      int tvoc = atoi(response.value);
+      Serial.print("tvoc=");
+      Serial.println(tvoc);
+      mustAknowledgeState = true;
     } else if (strcmp(response.key, "actp") == 0)  {
       _actualTemperature = strtof(response.value, NULL);
       Serial.print("_actualTemperature=");
       Serial.println(_actualTemperature);
       mustAknowledgeState = true;
-    } else if (strcmp(response.key, "mitp") == 0)  {
+    }else if (strcmp(response.key, "mitp") == 0)  {
       _minTemperature = strtof(response.value, NULL);
       mustAknowledgeState = true;
       Serial.print("mitp=");

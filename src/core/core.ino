@@ -3,12 +3,16 @@
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <Wire.h>
+#include "SparkFunCCS811.h"
 #include "secrets.h" // rename & update secrets.template.h
 #include "debug.h"
 #include "utils.h"
 
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
+
+#define CCS811_ADDR 0x5A
 
 struct RequestData {
     char key[5];
@@ -17,9 +21,11 @@ struct RequestData {
     int lastComputationTime;
 };
 
-#define  DATALIST_SIZE 8
+#define  DATALIST_SIZE 10
 RequestData _dataList[DATALIST_SIZE] = {
   {"ep", 0, "", 0}
+  , {"co2", 0, "", 0}
+  , {"tvoc", 0, "", 0}
   , {"actp", 0, DATA_01_URL, 0}
   , {"mitp", 0, DATA_02_URL, 0}
   , {"matp", 0, DATA_03_URL, 0}
@@ -40,7 +46,8 @@ int             _wifiProblemDeepSleepDuration = 150; // 2min30
 
 const           byte _txPin = 14; //5;
 const           byte _rxPin = 12; //4;
-Communication _serial(_rxPin, _txPin);
+Communication   _serial(_rxPin, _txPin);
+CCS811          mySensor(CCS811_ADDR);
 
 void wifiSetup()
 {
@@ -88,6 +95,14 @@ void setup() {
   Serial.begin(115200);
 #endif
   pinMode(LED_BUILTIN, OUTPUT);
+
+  Wire.begin();
+  if (mySensor.begin() == false)
+  {
+    Serial.print("CCS811 error. Please check wiring. Freezing...");
+    while (1)
+      ;
+  }
 
   wifiSetup();
   timeClientSetup();
@@ -140,6 +155,28 @@ void loop() {
         _serial.sendMessage(("ep:" + String(epochTime)).c_str());
         _dataList[i].state = 1;
         Serial.println("Sent ep value");
+        break;
+      } else if (strcmp(_dataList[i].key, "co2") == 0) {
+        if (mySensor.dataAvailable())
+        {
+          mySensor.readAlgorithmResults();
+          int co2 = mySensor.getCO2();
+          Serial.println(("co2:" + String(co2)).c_str());
+          _serial.sendMessage(("co2:" + String(co2)).c_str());
+        }
+        _dataList[i].state = 1;
+        Serial.println("Sent co2 value");
+        break;
+      } else if (strcmp(_dataList[i].key, "tvoc") == 0) {
+        if (mySensor.dataAvailable())
+        {
+          mySensor.readAlgorithmResults();
+          int tvoc = mySensor.getTVOC();
+          Serial.println(("tvoc:" + String(tvoc)).c_str());
+          _serial.sendMessage(("tvoc:" + String(tvoc)).c_str());
+        }
+        _dataList[i].state = 1;
+        Serial.println("Sent tvoc value");
         break;
       } else {
         char result[16];
