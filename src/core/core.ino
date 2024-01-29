@@ -48,7 +48,7 @@ int             _wifiProblemDeepSleepDuration = 150; // 2min30
 const           byte _txPin = 14; //5;
 const           byte _rxPin = 12; //4;
 Communication   _serial(_rxPin, _txPin);
-CCS811          mySensor(CCS811_ADDR);
+CCS811          _ccsSensor(CCS811_ADDR);
 
 void wifiSetup()
 {
@@ -98,7 +98,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   Wire.begin();
-  if (mySensor.begin() == false)
+  if (_ccsSensor.begin() == false)
   {
     Serial.print("CCS811 error. Please check wiring. Freezing...");
     while (1)
@@ -158,10 +158,10 @@ void loop() {
         Serial.println("Sent ep value");
         break;
       } else if (strcmp(_dataList[i].key, "co2") == 0) {
-        if (mySensor.dataAvailable())
+        if (_ccsSensor.dataAvailable())
         {
-          mySensor.readAlgorithmResults();
-          int co2 = mySensor.getCO2();
+          _ccsSensor.readAlgorithmResults();
+          int co2 = _ccsSensor.getCO2();
           Serial.println(("co2:" + String(co2)).c_str());
           _serial.sendMessage(("co2:" + String(co2)).c_str());
 
@@ -174,10 +174,10 @@ void loop() {
         Serial.println("Sent co2 value");
         break;
       } else if (strcmp(_dataList[i].key, "tvoc") == 0) {
-        if (mySensor.dataAvailable())
+        if (_ccsSensor.dataAvailable())
         {
-          mySensor.readAlgorithmResults();
-          int tvoc = mySensor.getTVOC();
+          _ccsSensor.readAlgorithmResults();
+          int tvoc = _ccsSensor.getTVOC();
           Serial.println(("tvoc:" + String(tvoc)).c_str());
           _serial.sendMessage(("tvoc:" + String(tvoc)).c_str());
 
@@ -222,7 +222,7 @@ void loop() {
     float temperature = strtof(temperatureBuffer, NULL);
     Serial.print("Temperature="); Serial.println(temperature);
 
-    mySensor.setEnvironmentalData(humidity, temperature);
+    _ccsSensor.setEnvironmentalData(humidity, temperature);
 
     Serial.print(F("Free heap : "));
     Serial.println(ESP.getFreeHeap());
