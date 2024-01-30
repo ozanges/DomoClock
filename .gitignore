@@ -11,5 +11,6 @@
 **/*_RP2040.txt
 **/*_ESP8266.txt
 **/*_ALL.txt
+**/archive.zip
 **/bin
 **/obj
