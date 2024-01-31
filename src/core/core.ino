@@ -15,10 +15,10 @@
 #define CCS811_ADDR 0x5A
 
 struct RequestData {
-    char key[5];
-    int  state; // 0 = must be computed ; 1 = computed
-    char uri[128];
-    int lastComputationTime;
+  char key[5];
+  int  state; // 0 = must be computed ; 1 = computed
+  char uri[128];
+  int lastComputationTime;
 };
 
 #define  DATALIST_SIZE 12
@@ -61,14 +61,12 @@ void wifiSetup()
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, WIFI_PASSWORD);
 
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while(WiFi.status() != WL_CONNECTED) {
     DPRINT(F("."));
     delay(500);
     blink(1);
 
-    if (wifiRetry++ >= MAX_WIFI_CONNECTION_RETRY_COUNT)
-    {
+    if(wifiRetry++ >= MAX_WIFI_CONNECTION_RETRY_COUNT) {
       DPRINTLN();
       DPRINT(F("Wifi connexion failure after "));
       DPRINT(wifiRetry);
@@ -86,23 +84,23 @@ void wifiSetup()
   DPRINTLN(WiFi.localIP());
 }
 
-void timeClientSetup() {
+void timeClientSetup()
+{
   timeClient.begin();
   timeClient.setTimeOffset(3600);
 }
 
-void setup() {
-
+void setup()
+{
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
   pinMode(LED_BUILTIN, OUTPUT);
 
   Wire.begin();
-  if (_ccsSensor.begin() == false)
-  {
+  if(_ccsSensor.begin() == false) {
     Serial.print("CCS811 error. Please check wiring. Freezing...");
-    while (1)
+    while(1)
       ;
   }
 
@@ -111,20 +109,23 @@ void setup() {
   _serial.setup();
 }
 
-String getWebData(const String& url) {
+String getWebData(const String & url)
+{
   String data = "";
   WiFiClient client;
   HTTPClient http;
-  if (http.begin(client, url)) { 
+  if(http.begin(client, url)) {
     int httpCode = http.GET();
-    if (httpCode > 0) {
-      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+    if(httpCode > 0) {
+      if(httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
         data = http.getString();
         // DPRINTLN(data);
       }
-    } 
-#ifdef DEBUG    
-    else { Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str()); }
+    }
+#ifdef DEBUG
+    else {
+      Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    }
 #endif
 
     http.end();
@@ -133,12 +134,14 @@ String getWebData(const String& url) {
   return data;
 }
 
-void loop() {
-  
-  if (_serial.listen()) {
-    Serial.print(F("Received: [")); Serial.print(_serial.getMessage()); Serial.println(F("]"));
-    for (int i = 0; i < DATALIST_SIZE; i++) {
-      if (strcmp(_serial.getMessage(), _dataList[i].key) == 0) {
+void loop()
+{
+  if(_serial.listen()) {
+    Serial.print(F("Received: ["));
+    Serial.print(_serial.getMessage());
+    Serial.println(F("]"));
+    for(int i = 0; i < DATALIST_SIZE; i++) {
+      if(strcmp(_serial.getMessage(), _dataList[i].key) == 0) {
         _dataList[i].state = 0;
         Serial.print("Aknowledge : ");
         Serial.print(_dataList[i].key);
@@ -148,9 +151,9 @@ void loop() {
     }
   }
 
-  for (int i = 0; i < DATALIST_SIZE; i++) {
-    if (_dataList[i].state == 0) {
-      if (strcmp(_dataList[i].key, "ep") == 0) {
+  for(int i = 0; i < DATALIST_SIZE; i++) {
+    if(_dataList[i].state == 0) {
+      if(strcmp(_dataList[i].key, "ep") == 0) {
         time_t epochTime = timeClient.getEpochTime();
         Serial.println(epochTime);
         Serial.println(("ep:" + String(epochTime)).c_str());
@@ -158,9 +161,9 @@ void loop() {
         _dataList[i].state = 1;
         Serial.println("Sent ep value");
         break;
-      } else if (strcmp(_dataList[i].key, "co2") == 0) {
-        if (_ccsSensor.dataAvailable())
-        {
+      }
+      else if(strcmp(_dataList[i].key, "co2") == 0) {
+        if(_ccsSensor.dataAvailable()) {
           _ccsSensor.readAlgorithmResults();
           int co2 = _ccsSensor.getCO2();
           Serial.println(("co2:" + String(co2)).c_str());
@@ -174,9 +177,9 @@ void loop() {
         _dataList[i].state = 1;
         Serial.println("Sent co2 value");
         break;
-      } else if (strcmp(_dataList[i].key, "tvoc") == 0) {
-        if (_ccsSensor.dataAvailable())
-        {
+      }
+      else if(strcmp(_dataList[i].key, "tvoc") == 0) {
+        if(_ccsSensor.dataAvailable()) {
           _ccsSensor.readAlgorithmResults();
           int tvoc = _ccsSensor.getTVOC();
           Serial.println(("tvoc:" + String(tvoc)).c_str());
@@ -190,7 +193,8 @@ void loop() {
         _dataList[i].state = 1;
         Serial.println("Sent tvoc value");
         break;
-      } else {
+      }
+      else {
         char result[32];
         snprintf(result, sizeof(result), "%s:%s", _dataList[i].key, getWebData(_dataList[i].uri).c_str());
 
@@ -206,27 +210,29 @@ void loop() {
   }
 
   unsigned long currentMillis = millis();
-	if (currentMillis - _previousTimeMillis >= _delayTime) {
+  if(currentMillis - _previousTimeMillis >= _delayTime) {
     timeClient.update();
-		_previousTimeMillis = currentMillis;
-	}
+    _previousTimeMillis = currentMillis;
+  }
 
   currentMillis = millis();
-	if (currentMillis - _previousMemMillis >= _delayMem) {
+  if(currentMillis - _previousMemMillis >= _delayMem) {
     char humidityBuffer[6];
     snprintf(humidityBuffer, sizeof(humidityBuffer), "%s", getWebData(DATA_08_URL).c_str());
     float humidity = strtof(humidityBuffer, NULL);
-    Serial.print("Humidity="); Serial.println(humidity);
+    Serial.print("Humidity=");
+    Serial.println(humidity);
 
     char temperatureBuffer[6];
     snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%s", getWebData(DATA_01_URL).c_str());
     float temperature = strtof(temperatureBuffer, NULL);
-    Serial.print("Temperature="); Serial.println(temperature);
+    Serial.print("Temperature=");
+    Serial.println(temperature);
 
     _ccsSensor.setEnvironmentalData(humidity, temperature);
 
     Serial.print(F("Free heap : "));
     Serial.println(ESP.getFreeHeap());
     _previousMemMillis = currentMillis;
-	}
+  }
 }
