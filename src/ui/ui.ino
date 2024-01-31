@@ -50,15 +50,15 @@ int                       _garageTodayPricePercentage  = 0;
 bool                      _isEpochFirstValidation      = true;
 RequestData               _dataList[DATALIST_SIZE];
 IconSelector              _iconList[ICONLIST_SIZE] = {
-  {"01d", ui_img_weather_clear_sky_png}
-  , {"02d", ui_img_weather_few_clouds_png}
-  , {"03d", ui_img_weather_scattered_clouds_png}
-  , {"04d", ui_img_weather_broken_clouds_png}
-  , {"09d", ui_img_weather_shower_rain_png}
-  , {"10d", ui_img_weather_rain_png}
-  , {"11d", ui_img_weather_thunderstorm_png}
-  , {"13d", ui_img_weather_snow_png}
-  , {"50d", ui_img_weather_mist_png}
+  {"01", ui_img_weather_clear_sky_png}
+  , {"02", ui_img_weather_few_clouds_png}
+  , {"03", ui_img_weather_scattered_clouds_png}
+  , {"04", ui_img_weather_broken_clouds_png}
+  , {"09", ui_img_weather_shower_rain_png}
+  , {"10", ui_img_weather_rain_png}
+  , {"11", ui_img_weather_thunderstorm_png}
+  , {"13", ui_img_weather_snow_png}
+  , {"50", ui_img_weather_mist_png}
 };
 int _weatherIndex = 0;
 
@@ -285,7 +285,8 @@ void loop()
       Serial.print("in=");
       Serial.println(response.value);
       for(int i = 0; i < ICONLIST_SIZE; i++) {
-        if(strcmp(response.value, _iconList[i].key) == 0) {
+        char *isIconFound = strstr(response.value, _iconList[i].key);
+        if (isIconFound != NULL) {
           lv_img_set_src(ui_ImgActualWeather, &_iconList[i].imgAddr);
           Serial.print("Set icon by key : ");
           Serial.println(_iconList[i].key);
