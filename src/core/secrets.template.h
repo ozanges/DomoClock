@@ -16,5 +16,10 @@
 #define DATA_05_URL "http://.../data05"
 #define DATA_06_URL "http://.../data06"
 #define DATA_07_URL "http://.../data07"
+#define DATA_08_URL "http://.../data08"
+#define DATA_09_URL "http://.../data09"
+
+#define DATA_50_URL "http://.../post_data50"
+#define DATA_51_URL "http://.../post_data51"
 
 #endif

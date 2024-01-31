@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-void OnBackgrounClicked(lv_event_t * e);
+void on_background_clicked(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

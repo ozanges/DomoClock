@@ -1,17 +1,25 @@
 ﻿using System;
 using System.IO;
 using System.IO.Ports;
+using System.IO.Compression;
 using System.Threading;
+using System.Linq;
 
 namespace SerialLog {
     class Program
     {
+        private static object _lockObj = new object();
+        private static string _logAllFileName = $"./Data/{DateTime.Now:yyyyMMdd_HHmmss}_ALL.txt";
+
         private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             CustomSerialPort serialPort = (CustomSerialPort)sender;        
             string data = serialPort.ReadLine();
             Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {serialPort.ConsolePrefix} - {data}");
             File.AppendAllText(serialPort.FileName, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {data}\n");
+            lock(_lockObj) {
+                File.AppendAllText(_logAllFileName, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {serialPort.ConsolePrefix} - {data}\n");
+            }
         }
 
         private static CustomSerialPort InitSerialPort(string port, int baud, string fileName, string consolePrefix, bool enableRts = false, bool enableDtr = false) {
@@ -36,6 +44,32 @@ namespace SerialLog {
 
             rp2040Port.Close();
             esp8266Port.Close();
+
+            ArchiveData();
+        }
+
+        private static void ArchiveData() {
+            string folderPath = "./Data/";
+            string zipFilePath = "./Data/archive.zip";
+
+            var files = Directory.GetFiles(folderPath, "*.txt")
+                                .OrderBy(f => File.GetLastWriteTime(f))
+                                .ToList();
+
+            if (files.Count > 10)
+            {
+                var filesToZip = files.Take(files.Count - 10);
+                using (ZipArchive zip = ZipFile.Open(zipFilePath, ZipArchiveMode.Update))
+                {
+                    foreach (var file in filesToZip)
+                    {
+                        zip.CreateEntryFromFile(file, Path.GetFileName(file));
+                        File.Delete(file);
+                    }
+                }
+            } else {
+                Console.WriteLine($"No file to add to \"{zipFilePath}\".");
+            }
         }
     }
 }

@@ -3,6 +3,8 @@
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <Wire.h>
+#include "SparkFunCCS811.h"
 #include "secrets.h" // rename & update secrets.template.h
 #include "debug.h"
 #include "utils.h"
@@ -10,18 +12,44 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 
+#define CCS811_ADDR 0x5A
+
+struct RequestData {
+  char key[5];
+  int  state; // 0 = must be computed ; 1 = computed
+  char uri[128];
+  int lastComputationTime;
+};
+
+#define  DATALIST_SIZE 12
+RequestData _dataList[DATALIST_SIZE] = {
+  {"ep", 0, "", 0}
+  , {"co2", 0, "", 0}
+  , {"tvoc", 0, "", 0}
+  , {"actp", 0, DATA_01_URL, 0}
+  , {"mitp", 0, DATA_02_URL, 0}
+  , {"matp", 0, DATA_03_URL, 0}
+  , {"as", 0, DATA_04_URL, 0}
+  , {"hp", 0, DATA_05_URL, 0}
+  , {"lp", 0, DATA_06_URL, 0}
+  , {"gp", 0, DATA_07_URL, 0}
+  , {"hu", 0, DATA_08_URL, 0}
+  , {"in", 0, DATA_09_URL, 0}
+};
+
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
-long            _delayTX                      = 30 * 1000; // 30 sec
-unsigned long   _previousTXMillis             = 0;
+long            _delayTime                    = 1 * 1000; // 1 sec
+long            _delayMem                     = 60 * 1000; // 60 sec
+unsigned long   _previousTimeMillis           = 0;
+unsigned long   _previousMemMillis            = 0;
 int             _wifiProblemDeepSleepDuration = 150; // 2min30
-String          weekDays[7]                   = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-String          months[12]                    = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
-const           byte _txPin = 5;
-const           byte _rxPin = 4;
-Communication _serial(_rxPin, _txPin);
+const           byte _txPin = 14; //5;
+const           byte _rxPin = 12; //4;
+Communication   _serial(_rxPin, _txPin);
+CCS811          _ccsSensor(CCS811_ADDR);
 
 void wifiSetup()
 {
@@ -33,14 +61,12 @@ void wifiSetup()
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, WIFI_PASSWORD);
 
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while(WiFi.status() != WL_CONNECTED) {
     DPRINT(F("."));
     delay(500);
     blink(1);
 
-    if (wifiRetry++ >= MAX_WIFI_CONNECTION_RETRY_COUNT)
-    {
+    if(wifiRetry++ >= MAX_WIFI_CONNECTION_RETRY_COUNT) {
       DPRINTLN();
       DPRINT(F("Wifi connexion failure after "));
       DPRINT(wifiRetry);
@@ -58,36 +84,48 @@ void wifiSetup()
   DPRINTLN(WiFi.localIP());
 }
 
-void timeClientSetup() {
+void timeClientSetup()
+{
   timeClient.begin();
   timeClient.setTimeOffset(3600);
 }
 
-void setup() {
+void setup()
+{
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
   pinMode(LED_BUILTIN, OUTPUT);
+
+  Wire.begin();
+  if(_ccsSensor.begin() == false) {
+    Serial.print("CCS811 error. Please check wiring. Freezing...");
+    while(1)
+      ;
+  }
 
   wifiSetup();
   timeClientSetup();
   _serial.setup();
 }
 
-String getWebData(const String& url) {
+String getWebData(const String & url)
+{
   String data = "";
   WiFiClient client;
   HTTPClient http;
-  if (http.begin(client, url)) { 
+  if(http.begin(client, url)) {
     int httpCode = http.GET();
-    if (httpCode > 0) {
-      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+    if(httpCode > 0) {
+      if(httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
         data = http.getString();
         // DPRINTLN(data);
       }
-    } 
-#ifdef DEBUG    
-    else { Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str()); }
+    }
+#ifdef DEBUG
+    else {
+      Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    }
 #endif
 
     http.end();
@@ -96,60 +134,105 @@ String getWebData(const String& url) {
   return data;
 }
 
-String _actualTemperature = "0.0";
-String _minTemperature = "0.0";
-String _maxtemperature = "0.0";
-String _actualStatus = "empty";
-String _houseTodayPricePercentage = "0";
-String _laundryTodayPricePercentage = "0";
-String _garageTodayPricePercentage = "0";
+void loop()
+{
+  if(_serial.listen()) {
+    Serial.print(F("Received: ["));
+    Serial.print(_serial.getMessage());
+    Serial.println(F("]"));
+    for(int i = 0; i < DATALIST_SIZE; i++) {
+      if(strcmp(_serial.getMessage(), _dataList[i].key) == 0) {
+        _dataList[i].state = 0;
+        Serial.print("Aknowledge : ");
+        Serial.print(_dataList[i].key);
+        Serial.println(" / state = 0");
+        break;
+      }
+    }
+  }
 
-void loop() {
-  
-  if (_serial.listen()) {
-    Serial.print(F("Received: [")); Serial.print(_serial.getMessage()); Serial.println(F("]"));
-    if (strcmp(_serial.getMessage(), "ep") == 0) {
-      time_t epochTime = timeClient.getEpochTime();
-      struct tm *ptm = gmtime ((time_t *)&epochTime); 
-      int monthDay = ptm->tm_mday;
-      int currentMonth = ptm->tm_mon+1;
-      String currentMonthName = months[currentMonth-1];
-      int currentYear = ptm->tm_year+1900;
+  for(int i = 0; i < DATALIST_SIZE; i++) {
+    if(_dataList[i].state == 0) {
+      if(strcmp(_dataList[i].key, "ep") == 0) {
+        time_t epochTime = timeClient.getEpochTime();
+        Serial.println(epochTime);
+        Serial.println(("ep:" + String(epochTime)).c_str());
+        _serial.sendMessage(("ep:" + String(epochTime)).c_str());
+        _dataList[i].state = 1;
+        Serial.println("Sent ep value");
+        break;
+      }
+      else if(strcmp(_dataList[i].key, "co2") == 0) {
+        if(_ccsSensor.dataAvailable()) {
+          _ccsSensor.readAlgorithmResults();
+          int co2 = _ccsSensor.getCO2();
+          Serial.println(("co2:" + String(co2)).c_str());
+          _serial.sendMessage(("co2:" + String(co2)).c_str());
 
-      _serial.sendMessage(("ep:" + String(epochTime)).c_str());
-    } else if (strcmp(_serial.getMessage(), "actp") == 0) {
-      _serial.sendMessage(("actp:" + String(_actualTemperature)).c_str());
-    } else if (strcmp(_serial.getMessage(), "mitp") == 0) {
-      _serial.sendMessage(("mitp:" + String(_minTemperature)).c_str());
-    } else if (strcmp(_serial.getMessage(), "matp") == 0) {
-      _serial.sendMessage(("matp:" + String(_maxtemperature)).c_str());
-    } else if (strcmp(_serial.getMessage(), "as") == 0) {
-      _serial.sendMessage(("as:" + String(_actualStatus)).c_str());
-    } else if (strcmp(_serial.getMessage(), "hp") == 0) {
-      _serial.sendMessage(("hp:" + String(_houseTodayPricePercentage)).c_str());
-    } else if (strcmp(_serial.getMessage(), "lp") == 0) {
-      _serial.sendMessage(("lp:" + String(_laundryTodayPricePercentage)).c_str());
-    } else if (strcmp(_serial.getMessage(), "gp") == 0) {
-      _serial.sendMessage(("gp:" + String(_garageTodayPricePercentage)).c_str());
-    } else {
-      Serial.println("Unknown data asked !");
+          char postDataBuffer[129];
+          snprintf(postDataBuffer, sizeof(postDataBuffer), "%s%d", DATA_50_URL, co2);
+          Serial.println(postDataBuffer);
+          getWebData(postDataBuffer);
+        }
+        _dataList[i].state = 1;
+        Serial.println("Sent co2 value");
+        break;
+      }
+      else if(strcmp(_dataList[i].key, "tvoc") == 0) {
+        if(_ccsSensor.dataAvailable()) {
+          _ccsSensor.readAlgorithmResults();
+          int tvoc = _ccsSensor.getTVOC();
+          Serial.println(("tvoc:" + String(tvoc)).c_str());
+          _serial.sendMessage(("tvoc:" + String(tvoc)).c_str());
+
+          char postDataBuffer[129];
+          snprintf(postDataBuffer, sizeof(postDataBuffer), "%s%d", DATA_51_URL, tvoc);
+          Serial.println(postDataBuffer);
+          getWebData(postDataBuffer);
+        }
+        _dataList[i].state = 1;
+        Serial.println("Sent tvoc value");
+        break;
+      }
+      else {
+        char result[32];
+        snprintf(result, sizeof(result), "%s:%s", _dataList[i].key, getWebData(_dataList[i].uri).c_str());
+
+        _serial.sendMessage(result);
+        _dataList[i].state = 1;
+        Serial.print("Sent ");
+        Serial.print(_dataList[i].key);
+        Serial.print(" = ");
+        Serial.println(result);
+        break;
+      }
     }
   }
 
   unsigned long currentMillis = millis();
-	if (currentMillis - _previousTXMillis >= _delayTX) {
+  if(currentMillis - _previousTimeMillis >= _delayTime) {
     timeClient.update();
-		_previousTXMillis = currentMillis;
+    _previousTimeMillis = currentMillis;
+  }
 
-    _actualTemperature = getWebData(DATA_01_URL);
-    _minTemperature = getWebData(DATA_02_URL);
-    _maxtemperature = getWebData(DATA_03_URL);
-    _actualStatus = getWebData(DATA_04_URL);
-    _houseTodayPricePercentage = getWebData(DATA_05_URL);
-    _laundryTodayPricePercentage = getWebData(DATA_06_URL);
-    _garageTodayPricePercentage = getWebData(DATA_07_URL);
+  currentMillis = millis();
+  if(currentMillis - _previousMemMillis >= _delayMem) {
+    char humidityBuffer[6];
+    snprintf(humidityBuffer, sizeof(humidityBuffer), "%s", getWebData(DATA_08_URL).c_str());
+    float humidity = strtof(humidityBuffer, NULL);
+    Serial.print("Humidity=");
+    Serial.println(humidity);
+
+    char temperatureBuffer[6];
+    snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%s", getWebData(DATA_01_URL).c_str());
+    float temperature = strtof(temperatureBuffer, NULL);
+    Serial.print("Temperature=");
+    Serial.println(temperature);
+
+    _ccsSensor.setEnvironmentalData(humidity, temperature);
 
     Serial.print(F("Free heap : "));
     Serial.println(ESP.getFreeHeap());
-	}
+    _previousMemMillis = currentMillis;
+  }
 }
