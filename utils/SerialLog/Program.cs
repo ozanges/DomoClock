@@ -56,9 +56,9 @@ namespace SerialLog {
                                 .OrderBy(f => File.GetLastWriteTime(f))
                                 .ToList();
 
-            if (files.Count > 10)
+            if (files.Count > 9)
             {
-                var filesToZip = files.Take(files.Count - 10);
+                var filesToZip = files.Take(files.Count - 9);
                 using (ZipArchive zip = ZipFile.Open(zipFilePath, ZipArchiveMode.Update))
                 {
                     foreach (var file in filesToZip)
