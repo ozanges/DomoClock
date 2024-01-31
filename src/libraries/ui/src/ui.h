@@ -30,6 +30,11 @@ void AniImgSeconde_Animation( lv_obj_t *TargetObject, int delay);
 void AniGpHour_Animation( lv_obj_t *TargetObject, int delay);
 void AniLbMinute00_Animation( lv_obj_t *TargetObject, int delay);
 void opacity_Animation( lv_obj_t *TargetObject, int delay);
+// SCREEN: ui_SplashScreen
+void ui_SplashScreen_screen_init(void);
+void ui_event_SplashScreen( lv_event_t * e);
+extern lv_obj_t *ui_SplashScreen;
+extern lv_obj_t *ui_Image1;
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
 void ui_event_ScrClock( lv_event_t * e);
@@ -59,6 +64,7 @@ extern lv_obj_t *ui_ArcThirdElectricity;
 void ui_event____initial_actions0( lv_event_t * e);
 extern lv_obj_t *ui____initial_actions0;
 
+LV_IMG_DECLARE( ui_img_splash_screen_png);   // assets\splash_screen.png
 LV_IMG_DECLARE( ui_img_background_png);   // assets\background.png
 LV_IMG_DECLARE( ui_img_sec_dot_png);   // assets\sec_dot.png
 LV_IMG_DECLARE( ui_img_weather_png);   // assets\weather.png

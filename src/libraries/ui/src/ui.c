@@ -13,6 +13,13 @@ void AniLbMinute00_Animation( lv_obj_t *TargetObject, int delay);
 void opacity_Animation( lv_obj_t *TargetObject, int delay);
 
 
+// SCREEN: ui_SplashScreen
+void ui_SplashScreen_screen_init(void);
+void ui_event_SplashScreen( lv_event_t * e);
+lv_obj_t *ui_SplashScreen;
+lv_obj_t *ui_Image1;
+
+
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
 void ui_event_ScrClock( lv_event_t * e);
@@ -182,6 +189,12 @@ lv_anim_start(&PropertyAnimation_0);
 }
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_SplashScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      _ui_screen_change( &ui_ScrClock, LV_SCR_LOAD_ANIM_FADE_ON, 0, 5000, &ui_ScrClock_screen_init);
+}
+}
 void ui_event_ScrClock( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
@@ -210,10 +223,11 @@ void ui_init( void )
 lv_disp_t *dispp = lv_disp_get_default();
 lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
 lv_disp_set_theme(dispp, theme);
+ui_SplashScreen_screen_init();
 ui_ScrClock_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_obj_add_event_cb(ui____initial_actions0, ui_event____initial_actions0, LV_EVENT_ALL, NULL);
 
 lv_disp_load_scr(ui____initial_actions0);
-lv_disp_load_scr( ui_ScrClock);
+lv_disp_load_scr( ui_SplashScreen);
 }

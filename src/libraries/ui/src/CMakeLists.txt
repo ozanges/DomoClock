@@ -1,10 +1,12 @@
 SET(SOURCES components/ui_comp_hour_group.c
     components/ui_comp.c
+    screens/ui_SplashScreen.c
     screens/ui_ScrClock.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
     ui_events.c
+    images/ui_img_splash_screen_png.c
     images/ui_img_background_png.c
     images/ui_img_sec_dot_png.c
     images/ui_img_weather_png.c

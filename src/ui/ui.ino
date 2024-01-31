@@ -150,7 +150,7 @@ void setup()
   tv.tv_usec = 0;
   settimeofday(&tv, nullptr);
 
-  delay(7000); // delay for start SerialLog
+  // delay(7000); // delay for start SerialLog
 
   Serial.println("Setup done");
 }
