@@ -69,6 +69,7 @@ void compute_color(uint8_t valeur, uint8_t * rouge, uint8_t * vert, uint8_t * bl
 void disp_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color_p);
 void on_background_clicked(lv_event_t * e);
 void set_backlight_intensity(uint8_t Value);
+void set_french_local(char* buffer);
 void touch_callback();
 void touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data);
 
@@ -383,6 +384,7 @@ void loop()
     int year;
     char formattedMinute[3];
 
+    set_french_local(buff);
     sscanf(buff, "%s %s %d %d:%d:%d %d", dayOfWeek, month, &day, &hour, &minute, &second, &year);
     sprintf(formattedMinute, "%02d", minute);
 
@@ -495,6 +497,26 @@ void set_backlight_intensity(uint8_t Value)
   else {
     analogWrite(TFT_BL, Value * 2.55);
   }
+}
+
+void set_french_local(char* buffer) {
+    const char* daysEnglish[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    const char* daysFrench[]  = {"Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"};
+    const char* monthsEnglish[] = {"Feb", "Apr", "May", "Aug", "Dec"};
+    const char* monthsFrench[]  = {"Fév", "Avr", "Mai", "Aoû", "Déc"};
+    for (int i = 0; i < 7; ++i) {
+        if (strstr(buffer, daysEnglish[i])) {
+            strncpy(buffer + (strstr(buffer, daysEnglish[i]) - buffer), daysFrench[i], 3);
+            break;
+        }
+    }
+
+    for (int i = 0; i < 5; ++i) {
+        if (strstr(buffer, monthsEnglish[i])) {
+            strncpy(buffer + (strstr(buffer, monthsEnglish[i]) - buffer), monthsFrench[i], 3);
+            break;
+        }
+    }
 }
 
 void touch_callback()
