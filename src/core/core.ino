@@ -21,7 +21,7 @@ struct RequestData {
     int lastComputationTime;
 };
 
-#define  DATALIST_SIZE 11
+#define  DATALIST_SIZE 12
 RequestData _dataList[DATALIST_SIZE] = {
   {"ep", 0, "", 0}
   , {"co2", 0, "", 0}
@@ -34,6 +34,7 @@ RequestData _dataList[DATALIST_SIZE] = {
   , {"lp", 0, DATA_06_URL, 0}
   , {"gp", 0, DATA_07_URL, 0}
   , {"hu", 0, DATA_08_URL, 0}
+  , {"in", 0, DATA_09_URL, 0}
 };
 
 WiFiUDP ntpUDP;
@@ -190,7 +191,7 @@ void loop() {
         Serial.println("Sent tvoc value");
         break;
       } else {
-        char result[16];
+        char result[32];
         snprintf(result, sizeof(result), "%s:%s", _dataList[i].key, getWebData(_dataList[i].uri).c_str());
 
         _serial.sendMessage(result);

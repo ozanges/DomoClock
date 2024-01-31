@@ -11,65 +11,65 @@ extern "C" {
 #endif
 
 #if defined __has_include
-#if __has_include("lvgl.h")
-#include "lvgl.h"
-#elif __has_include("lvgl/lvgl.h")
-#include "lvgl/lvgl.h"
+  #if __has_include("lvgl.h")
+    #include "lvgl.h"
+  #elif __has_include("lvgl/lvgl.h")
+    #include "lvgl/lvgl.h"
+  #else
+    #include "lvgl.h"
+  #endif
 #else
-#include "lvgl.h"
-#endif
-#else
-#include "lvgl.h"
+  #include "lvgl.h"
 #endif
 
 #include "ui_helpers.h"
 #include "components/ui_comp.h"
 #include "components/ui_comp_hook.h"
 #include "ui_events.h"
-void AniImgSeconde_Animation(lv_obj_t * TargetObject, int delay);
-void AniGpHour_Animation(lv_obj_t * TargetObject, int delay);
-void AniLbMinute00_Animation(lv_obj_t * TargetObject, int delay);
-void opacity_Animation(lv_obj_t * TargetObject, int delay);
+void AniImgSeconde_Animation( lv_obj_t *TargetObject, int delay);
+void AniGpHour_Animation( lv_obj_t *TargetObject, int delay);
+void AniLbMinute00_Animation( lv_obj_t *TargetObject, int delay);
+void opacity_Animation( lv_obj_t *TargetObject, int delay);
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
-void ui_event_ScrClock(lv_event_t * e);
-extern lv_obj_t * ui_ScrClock;
-extern lv_obj_t * ui_ImgSeconde;
-extern lv_obj_t * ui_LbMinute00;
-extern lv_obj_t * ui_GpHour;
-extern lv_obj_t * ui_LbHour0h;
-extern lv_obj_t * ui_LbHourh0;
-extern lv_obj_t * ui_BtGoToWeatherScreen;
-extern lv_obj_t * ui_ImgWeather;
-extern lv_obj_t * ui_ImgArc;
-extern lv_obj_t * ui_PnlCalendar;
-extern lv_obj_t * ui_LbDayOfWeek;
-extern lv_obj_t * ui_LbDate;
-extern lv_obj_t * ui_LbYear;
-extern lv_obj_t * ui_PnlActualWeather;
-extern lv_obj_t * ui_LbActualTemperature;
-extern lv_obj_t * ui_ImgActualWeather;
-extern lv_obj_t * ui_PnlTemperature;
-extern lv_obj_t * ui_LbActualWeatherText;
-extern lv_obj_t * ui_LbActualRangeTemperature;
-extern lv_obj_t * ui_PnlElectricity;
-extern lv_obj_t * ui_ArcMainElectricity;
-extern lv_obj_t * ui_ArcSecondElectricity;
-extern lv_obj_t * ui_ArcThirdElectricity;
-void ui_event____initial_actions0(lv_event_t * e);
-extern lv_obj_t * ui____initial_actions0;
+void ui_event_ScrClock( lv_event_t * e);
+extern lv_obj_t *ui_ScrClock;
+extern lv_obj_t *ui_ImgSeconde;
+extern lv_obj_t *ui_LbMinute00;
+extern lv_obj_t *ui_GpHour;
+extern lv_obj_t *ui_LbHour0h;
+extern lv_obj_t *ui_LbHourh0;
+extern lv_obj_t *ui_BtGoToWeatherScreen;
+extern lv_obj_t *ui_ImgWeather;
+extern lv_obj_t *ui_ImgArc;
+extern lv_obj_t *ui_PnlCalendar;
+extern lv_obj_t *ui_LbDayOfWeek;
+extern lv_obj_t *ui_LbDate;
+extern lv_obj_t *ui_LbYear;
+extern lv_obj_t *ui_PnlActualWeather;
+extern lv_obj_t *ui_LbActualTemperature;
+extern lv_obj_t *ui_ImgActualWeather;
+extern lv_obj_t *ui_PnlTemperature;
+extern lv_obj_t *ui_LbActualWeatherText;
+extern lv_obj_t *ui_LbActualRangeTemperature;
+extern lv_obj_t *ui_PnlElectricity;
+extern lv_obj_t *ui_ArcMainElectricity;
+extern lv_obj_t *ui_ArcSecondElectricity;
+extern lv_obj_t *ui_ArcThirdElectricity;
+void ui_event____initial_actions0( lv_event_t * e);
+extern lv_obj_t *ui____initial_actions0;
 
-LV_IMG_DECLARE(ui_img_background_png);    // assets\background.png
-LV_IMG_DECLARE(ui_img_sec_dot_png);    // assets\sec_dot.png
-LV_IMG_DECLARE(ui_img_weather_png);    // assets\weather.png
-LV_IMG_DECLARE(ui_img_btn_bg_3_png);    // assets\btn_bg_3.png
-LV_IMG_DECLARE(ui_img_weather_cloud_fog_png);    // assets\weather_cloud_fog.png
+LV_IMG_DECLARE( ui_img_background_png);   // assets\background.png
+LV_IMG_DECLARE( ui_img_sec_dot_png);   // assets\sec_dot.png
+LV_IMG_DECLARE( ui_img_weather_png);   // assets\weather.png
+LV_IMG_DECLARE( ui_img_btn_bg_3_png);   // assets\btn_bg_3.png
+LV_IMG_DECLARE( ui_img_weather_thunderstorm_png);   // assets\weather_thunderstorm.png
 
-LV_FONT_DECLARE(ui_font_Montsererat_bold_12_extended);
-LV_FONT_DECLARE(ui_font_Montserrat_light_120);
-LV_FONT_DECLARE(ui_font_Montserrat_light_20_extended);
-LV_FONT_DECLARE(ui_font_Montserrat_light_72);
-LV_FONT_DECLARE(ui_font_Montserrat_medium_12_extended);
+LV_FONT_DECLARE( ui_font_Montsererat_bold_12_extended);
+LV_FONT_DECLARE( ui_font_Montserrat_light_120);
+LV_FONT_DECLARE( ui_font_Montserrat_light_20_extended);
+LV_FONT_DECLARE( ui_font_Montserrat_light_72);
+LV_FONT_DECLARE( ui_font_Montserrat_medium_12_extended);
 
 void ui_init(void);
 

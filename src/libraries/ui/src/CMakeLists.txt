@@ -9,7 +9,7 @@ SET(SOURCES components/ui_comp_hour_group.c
     images/ui_img_sec_dot_png.c
     images/ui_img_weather_png.c
     images/ui_img_btn_bg_3_png.c
-    images/ui_img_weather_cloud_fog_png.c
+    images/ui_img_weather_thunderstorm_png.c
     fonts/ui_font_Montsererat_bold_12_extended.c
     fonts/ui_font_Montserrat_light_120.c
     fonts/ui_font_Montserrat_light_20_extended.c

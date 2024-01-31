@@ -4273,7 +4273,7 @@
                   {
                     "nid": -92811758,
                     "strtype": "IMAGE/Asset",
-                    "strval": "assets\\weather_cloud_fog.png",
+                    "strval": "assets\\weather_thunderstorm.png",
                     "InheritedType": 5
                   },
                   {
@@ -7261,7 +7261,7 @@
           {
             "disabled": false,
             "nid": -1641514484,
-            "strtype": "SCREEN/EventHandler",
+            "strtype": "_event/EventHandler",
             "strval": "CLICKED",
             "childs": [
               {
@@ -7284,7 +7284,7 @@
               },
               {
                 "nid": -1973816415,
-                "strtype": "_custom/action",
+                "strtype": "_event/action",
                 "strval": "CALL FUNCTION",
                 "childs": [
                   {
@@ -7308,7 +7308,7 @@
                   {
                     "nid": -890521587,
                     "strtype": "CALL FUNCTION/Function_name",
-                    "strval": "OnBackgrounClicked",
+                    "strval": "on_background_clicked",
                     "InheritedType": 10
                   },
                   {
@@ -8717,9 +8717,9 @@
     "theme_dark": false,
     "theme_color1": 5,
     "theme_color2": 0,
-    "uiExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
-    "projectExportFolderPath": "D:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 217,
+    "uiExportFolderPath": "C:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
+    "projectExportFolderPath": "C:\\Dev\\Arduino\\DomoClock\\src\\",
+    "backup_cnt": 239,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

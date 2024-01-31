@@ -9,7 +9,23 @@
 #include <TFT_eSPI.h>
 #include <ui.h>
 
-#define  DATALIST_SIZE 10
+#define  DATALIST_SIZE 11
+#define  ICONLIST_SIZE 9
+
+LV_IMG_DECLARE( ui_img_weather_broken_clouds_png);    // assets\weather_broken_clouds.png
+LV_IMG_DECLARE( ui_img_weather_clear_sky_png);        // assets\weather_clear_sky.png
+LV_IMG_DECLARE( ui_img_weather_few_clouds_png);       // assets\weather_few_clouds.png
+LV_IMG_DECLARE( ui_img_weather_mist_png);             // assets\weather_mist.png
+LV_IMG_DECLARE( ui_img_weather_rain_png);             // assets\weather_rain.png
+LV_IMG_DECLARE( ui_img_weather_scattered_clouds_png); // assets\weather_scattered_clouds.png
+LV_IMG_DECLARE( ui_img_weather_shower_rain_png);      // assets\weather_shower_rain.png
+LV_IMG_DECLARE( ui_img_weather_snow_png);             // assets\weather_snow.png
+LV_IMG_DECLARE( ui_img_weather_thunderstorm_png);     // assets\weather_thunderstorm.png
+
+struct IconSelector {
+    char key[4];
+    lv_img_dsc_t imgAddr;
+};
 
 /*Change to your screen resolution*/
 static const uint16_t     _screenWidth  = 240;
@@ -33,6 +49,18 @@ int                       _laundryTodayPricePercentage = 0;
 int                       _garageTodayPricePercentage  = 0;
 bool                      _isEpochFirstValidation      = true;
 RequestData               _dataList[DATALIST_SIZE];
+IconSelector              _iconList[ICONLIST_SIZE] = {
+  {"01d", ui_img_weather_clear_sky_png}
+  , {"02d", ui_img_weather_few_clouds_png}
+  , {"03d", ui_img_weather_scattered_clouds_png}
+  , {"04d", ui_img_weather_broken_clouds_png}
+  , {"09d", ui_img_weather_shower_rain_png}
+  , {"10d", ui_img_weather_rain_png}
+  , {"11d", ui_img_weather_thunderstorm_png}
+  , {"13d", ui_img_weather_snow_png}
+  , {"50d", ui_img_weather_mist_png}
+};
+int _weatherIndex = 0;
 
 TFT_eSPI                  _tft = TFT_eSPI(_screenWidth, _screenHeight);
 Communication             _serial(_rxPin, _txPin);
@@ -64,6 +92,7 @@ void setup()
     _dataList[7] = {"hp", millis(), 5 * 60 * 1000, 0}; // 5 min
     _dataList[8] = {"lp", millis(), 5 * 60 * 1000, 0}; // 5 min
     _dataList[9] = {"gp", millis(), 5 * 60 * 1000, 0}; // 5 min
+    _dataList[10] = {"in", millis(), 30 * 60 * 1000, 0}; // 30 min
 
     Serial.begin( 115200 ); /* prepare for possible serial debug */
 
@@ -209,7 +238,7 @@ void loop()
       Serial.print("_actualTemperature=");
       Serial.println(_actualTemperature);
       mustAknowledgeState = true;
-    }else if (strcmp(response.key, "mitp") == 0)  {
+    } else if (strcmp(response.key, "mitp") == 0)  {
       _minTemperature = strtof(response.value, NULL);
       mustAknowledgeState = true;
       Serial.print("mitp=");
@@ -239,6 +268,19 @@ void loop()
       mustAknowledgeState = true;
       Serial.print("gp=");
       Serial.println(_garageTodayPricePercentage);
+    } else if (strcmp(response.key, "in") == 0)  {
+      Serial.print("in=");
+      Serial.println(response.value);
+      for (int i = 0; i < ICONLIST_SIZE; i++) {
+        if (strcmp(response.value, _iconList[i].key) == 0) {
+          lv_img_set_src(ui_ImgActualWeather, &_iconList[i].imgAddr);
+          Serial.print("Set icon by key : ");
+          Serial.println(_iconList[i].key);
+          break;
+        }
+      }
+
+      mustAknowledgeState = true;
     } else {
       Serial.println("Unknown data response !");
     }
@@ -371,6 +413,15 @@ void loop()
       compute_color(_garageTodayPricePercentage, &rouge, &vert, &bleu);
       color = lv_color_make(rouge, vert, bleu);
       lv_obj_set_style_arc_color(ui_ArcThirdElectricity, color, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+      
+      // _weatherIndex += 1;
+      // if (_weatherIndex >= 9) {
+      //   _weatherIndex = 0;
+      // }
+
+      // Serial.print("********** _weatherIndex=");
+      // Serial.println(_weatherIndex);
+      // lv_img_set_src(ui_ImgActualWeather, &_iconList[_weatherIndex].imgAddr);
   }
 
   currentMillis = millis();
