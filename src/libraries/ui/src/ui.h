@@ -35,6 +35,7 @@ void ui_SplashScreen_screen_init(void);
 void ui_event_SplashScreen( lv_event_t * e);
 extern lv_obj_t *ui_SplashScreen;
 extern lv_obj_t *ui_Image1;
+extern lv_obj_t *ui_Spinner1;
 // SCREEN: ui_ScrClock
 void ui_ScrClock_screen_init(void);
 void ui_event_ScrClock( lv_event_t * e);
