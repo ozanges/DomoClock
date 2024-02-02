@@ -28,6 +28,7 @@ struct IconSelector {
 };
 
 /*Change to your screen resolution*/
+const uint8_t             _screenRotation = 2;
 static const uint16_t     _screenWidth  = 240;
 static const uint16_t     _screenHeight = 240;
 static lv_disp_draw_buf_t _draw_buf;
@@ -120,7 +121,7 @@ void setup()
 
   _serial.setup();
   _tft.begin();
-  _tft.setRotation(0);
+  _tft.setRotation(_screenRotation);
   set_backlight_intensity(75);
 
   lv_disp_draw_buf_init(&_draw_buf, _buf, NULL, _screenWidth * _screenHeight / 10);
@@ -548,8 +549,13 @@ void touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
   }
   else {
     data->state = LV_INDEV_STATE_PR;
-    data->point.x = Touch_CTS816.x_point;
-    data->point.y = Touch_CTS816.y_point;
+    if (_screenRotation == 0) {
+      data->point.x = Touch_CTS816.x_point;
+      data->point.y = Touch_CTS816.y_point;
+    } else if (_screenRotation == 2) {
+      data->point.x = _screenWidth - 1 - Touch_CTS816.x_point;
+      data->point.y = _screenWidth - 1 - Touch_CTS816.y_point;
+    }
 
     // Serial.print( "Data x " );
     // Serial.println( Touch_CTS816.x_point );
