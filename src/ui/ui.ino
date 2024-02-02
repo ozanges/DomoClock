@@ -41,7 +41,6 @@ unsigned long             _previousTXMillis            = 0;
 long                      _delayBackLight              = 30 * 1000;
 unsigned long             _previousBackLightMillis     = 0;
 bool                      _isFirstTimeSet              = false;
-float                     _actualTemperature           = 0.0;
 float                     _minTemperature              = 0.0;
 float                     _maxTemperature              = 0.0;
 String                    _actualStatus                = "";
@@ -241,9 +240,12 @@ void loop()
       mustAknowledgeState = true;
     }
     else if(strcmp(response.key, "actp") == 0)  {
-      _actualTemperature = strtof(response.value, NULL);
-      Serial.print("_actualTemperature=");
-      Serial.println(_actualTemperature);
+      float value = strtof(response.value, NULL);
+      char formattedValue[8];
+      snprintf(formattedValue, sizeof(formattedValue), "%.1f°", value); 
+      Serial.print("Actual temperature : ");
+      Serial.println(formattedValue);
+      lv_label_set_text(ui_LbActualTemperature, formattedValue);
       mustAknowledgeState = true;
     }
     else if(strcmp(response.key, "mitp") == 0)  {
@@ -412,7 +414,6 @@ void loop()
 
     String rangeTemperature = "Min: " + String(_minTemperature, 0) + "° Max: " + String(_maxTemperature, 0) + "°";
     lv_label_set_text(ui_LbActualWeatherText, _actualStatus.c_str());
-    lv_label_set_text(ui_LbActualTemperature, String(_actualTemperature, 0).c_str());
     lv_label_set_text(ui_LbActualRangeTemperature, rangeTemperature.c_str());
 
     lv_arc_set_value(ui_ArcMainElectricity, _houseTodayPricePercentage);

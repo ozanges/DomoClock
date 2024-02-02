@@ -4600,7 +4600,7 @@
                     "flags": 17,
                     "strtype": "OBJECT/Position",
                     "intarray": [
-                      0,
+                      -10,
                       -3
                     ],
                     "InheritedType": 7
@@ -4827,7 +4827,7 @@
                   {
                     "nid": -569487791,
                     "strtype": "LABEL/Text",
-                    "strval": "26°",
+                    "strval": "26.0°",
                     "InheritedType": 10
                   },
                   {
@@ -9579,7 +9579,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "C:\\Dev\\Arduino\\DomoClock\\src\\libraries\\ui\\src",
     "projectExportFolderPath": "C:\\Dev\\Arduino\\DomoClock\\src\\",
-    "backup_cnt": 262,
+    "backup_cnt": 277,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

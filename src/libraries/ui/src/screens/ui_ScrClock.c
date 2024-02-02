@@ -167,10 +167,10 @@ lv_obj_set_style_border_opa(ui_PnlActualWeather, 0, LV_PART_MAIN| LV_STATE_DEFAU
 ui_LbActualTemperature = lv_label_create(ui_PnlActualWeather);
 lv_obj_set_width( ui_LbActualTemperature, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_LbActualTemperature, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_LbActualTemperature, 0 );
+lv_obj_set_x( ui_LbActualTemperature, -10 );
 lv_obj_set_y( ui_LbActualTemperature, -3 );
 lv_obj_set_align( ui_LbActualTemperature, LV_ALIGN_CENTER );
-lv_label_set_text(ui_LbActualTemperature,"26°");
+lv_label_set_text(ui_LbActualTemperature,"26.0°");
 lv_obj_set_style_text_color(ui_LbActualTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_LbActualTemperature, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_LbActualTemperature, &ui_font_Montserrat_light_20_extended, LV_PART_MAIN| LV_STATE_DEFAULT);
