@@ -35,7 +35,7 @@ namespace SerialLog {
         private static void Main()
         {
             CustomSerialPort rp2040Port = InitSerialPort("COM6", 115200, $"./Data/{DateTime.Now:yyyyMMdd_HHmmss}_RP2040.txt", "[RP]", true, true);
-            CustomSerialPort esp8266Port = InitSerialPort("COM8", 115200, $"./Data/{DateTime.Now:yyyyMMdd_HHmmss}_ESP8266.txt", "[ESP]");
+            CustomSerialPort esp8266Port = InitSerialPort("COM10", 115200, $"./Data/{DateTime.Now:yyyyMMdd_HHmmss}_ESP8266.txt", "[ESP]");
             rp2040Port.Open();
             esp8266Port.Open();
 
