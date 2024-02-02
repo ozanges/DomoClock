@@ -516,7 +516,7 @@ void set_french_local(char* buffer) {
 
     for (int i = 0; i < 5; ++i) {
         if (strstr(buffer, monthsEnglish[i])) {
-            strncpy(buffer + (strstr(buffer, monthsEnglish[i]) - buffer), monthsFrench[i], 3);
+            strncpy(buffer + (strstr(buffer, monthsEnglish[i]) - buffer), monthsFrench[i], 4);
             break;
         }
     }
