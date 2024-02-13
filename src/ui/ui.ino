@@ -379,7 +379,7 @@ void loop()
 
     time(&now);
     strftime(buff, sizeof(buff), "%c", localtime(&now));
-    //Serial.println(buff);
+    //Serial.print("buff : "); Serial.println(buff);
 
     char dayOfWeek[4];
     char month[4];
@@ -389,6 +389,7 @@ void loop()
     char formattedMinute[3];
 
     set_french_local(buff);
+    //Serial.print("frbuff : "); Serial.println(buff);
     sscanf(buff, "%s %s %d %d:%d:%d %d", dayOfWeek, month, &day, &hour, &minute, &second, &year);
     sprintf(formattedMinute, "%02d", minute);
 
@@ -399,7 +400,7 @@ void loop()
     // Serial.print("Heure : "); Serial.print(hour); Serial.print(":"); Serial.print(minute); Serial.print(":"); Serial.println(second);
     // Serial.print("Année : "); Serial.println(year);
     // Serial.print("formattedMinute : "); Serial.println(formattedMinute);
-
+    
     int firstHour = hour / 10;
     int secondHour = hour % 10;
     int sec_angle = 3600 * second / 60;
@@ -506,17 +507,18 @@ void set_french_local(char* buffer) {
     const char* daysEnglish[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     const char* daysFrench[]  = {"Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"};
     const char* monthsEnglish[] = {"Feb", "Apr", "May", "Aug", "Dec"};
-    const char* monthsFrench[]  = {"Fév", "Avr", "Mai", "Aoû", "Déc"};
+    // const char* monthsFrench[]  = {"Fév", "Avr", "Mai", "Aoû", "Déc"}; // diacritics problem : longer than expected
+    const char* monthsFrench[]  = {"Fev", "Avr", "Mai", "Aou", "Dec"};
     for (int i = 0; i < 7; ++i) {
         if (strstr(buffer, daysEnglish[i])) {
-            strncpy(buffer + (strstr(buffer, daysEnglish[i]) - buffer), daysFrench[i], 3);
+            strncpy(buffer + (strstr(buffer, daysEnglish[i]) - buffer), daysFrench[i], strlen(daysFrench[i]));
             break;
         }
     }
 
     for (int i = 0; i < 5; ++i) {
         if (strstr(buffer, monthsEnglish[i])) {
-            strncpy(buffer + (strstr(buffer, monthsEnglish[i]) - buffer), monthsFrench[i], 4);
+            strncpy(buffer + (strstr(buffer, monthsEnglish[i]) - buffer), monthsFrench[i], strlen(monthsFrench[i]));
             break;
         }
     }
